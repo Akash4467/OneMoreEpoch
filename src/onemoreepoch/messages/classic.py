@@ -1,0 +1,1 @@
+"""Classic training messages."""
