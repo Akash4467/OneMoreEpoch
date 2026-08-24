@@ -50,9 +50,7 @@ MESSAGES: dict[str, str] = {
         "📈 Loss {count} epochs se upar ja raha hai (abhi {value:.6f}).\n"
         "Bhai, learning rate thoda kam kar."
     ),
-    "lr_invalid": (
-        "🤨 Learning rate {value}? Ye kya mazaak hai — positive number do."
-    ),
+    "lr_invalid": ("🤨 Learning rate {value}? Ye kya mazaak hai — positive number do."),
     "empty_params": (
         "🫗 Optimizer ko khaali parameter list mili.\n"
         "Bina parameters ke kya optimize karein bhai? model.parameters() "
@@ -63,8 +61,7 @@ MESSAGES: dict[str, str] = {
         "Ek aur epoch? Naam hi OneMoreEpoch hai."
     ),
     "unknown_backend": (
-        "🤷 Backend {name!r} ka pata nahi.\n"
-        "Available backends: {available}."
+        "🤷 Backend {name!r} ka pata nahi.\n" "Available backends: {available}."
     ),
     "rust_backend_unavailable": (
         "🛑 Rust backend abhi ready nahi hai.\n"

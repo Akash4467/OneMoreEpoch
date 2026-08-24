@@ -32,7 +32,10 @@ def get_backend(name: str | None = None) -> Backend:
     package-import time.
     """
     backend_name = name or _DEFAULT_BACKEND
-    if backend_name not in _BACKENDS and backend_name not in _factory.available_factory_names():
+    if (
+        backend_name not in _BACKENDS
+        and backend_name not in _factory.available_factory_names()
+    ):
         try:
             importlib.import_module(f"onemoreepoch.core.backend.{backend_name}_backend")
         except ImportError:

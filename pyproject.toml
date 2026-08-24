@@ -47,6 +47,16 @@ include = [
     { path = "LICENSE", format = "sdist" },
 ]
 
+[tool.black]
+target-version = ["py312"]
+
+[tool.pytest.ini_options]
+# Without this, `python -m pytest` works (via -m's own sys.path insertion)
+# but running the pytest entry-point script directly — `pytest`, `uv run
+# pytest` — does not, and tests/meme_system/test_meme_updater.py's `import
+# tools...` fails. This makes both invocation styles equivalent.
+pythonpath = ["."]
+
 [dependency-groups]
 dev = [
     "black>=26.5.1",

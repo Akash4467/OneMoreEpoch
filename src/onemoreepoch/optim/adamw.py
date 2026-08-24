@@ -60,4 +60,6 @@ class AdamW(Optimizer):
 
         m_hat = m / (1 - self.beta1**t)
         v_hat = v / (1 - self.beta2**t)
-        param.data = param.data - self.lr * m_hat / (get_backend().sqrt(v_hat) + self.eps)
+        param.data = param.data - self.lr * m_hat / (
+            get_backend().sqrt(v_hat) + self.eps
+        )

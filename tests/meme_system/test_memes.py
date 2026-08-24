@@ -44,7 +44,12 @@ class TestCatalogValidation:
                     "schema_version": 1,
                     "catalog_version": "x",
                     "memes": [
-                        {"id": "1", "text": "t", "mode": "classic", "categories": ["not_a_category"]}
+                        {
+                            "id": "1",
+                            "text": "t",
+                            "mode": "classic",
+                            "categories": ["not_a_category"],
+                        }
                     ],
                 }
             )
@@ -58,7 +63,9 @@ class TestCatalogValidation:
         assert catalog is not None
         assert catalog.catalog_version  # loaded the packaged default
 
-    def test_completely_broken_catalog_yields_none_not_raise(self, tmp_path, monkeypatch):
+    def test_completely_broken_catalog_yields_none_not_raise(
+        self, tmp_path, monkeypatch
+    ):
         import onemoreepoch.messages.memes.catalog as catalog_mod
 
         monkeypatch.setattr(catalog_mod, "DEFAULT_CATALOG_PATH", tmp_path / "nope.json")

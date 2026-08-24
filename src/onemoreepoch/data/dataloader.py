@@ -50,5 +50,7 @@ class DataLoader:
 def _collate(samples: list) -> tuple | np.ndarray:
     first = samples[0]
     if isinstance(first, tuple):
-        return tuple(np.stack([sample[i] for sample in samples]) for i in range(len(first)))
+        return tuple(
+            np.stack([sample[i] for sample in samples]) for i in range(len(first))
+        )
     return np.stack(samples)

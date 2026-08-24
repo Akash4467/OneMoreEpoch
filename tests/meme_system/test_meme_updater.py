@@ -22,7 +22,9 @@ class TestLocalSeedCollector:
 class TestHeuristicClassifier:
     def test_assigns_categories_from_keywords(self):
         classifier = HeuristicClassifier()
-        candidate = CandidateMeme(text="Checkpoint saved after the gradient exploded.", mode="classic")
+        candidate = CandidateMeme(
+            text="Checkpoint saved after the gradient exploded.", mode="classic"
+        )
         classified = classifier.classify(candidate)
         assert "checkpoint_saved" in classified.categories
         assert "gradient_error" in classified.categories
@@ -39,7 +41,9 @@ class TestHeuristicClassifier:
 
     def test_no_keyword_match_yields_empty_categories(self):
         classifier = HeuristicClassifier()
-        classified = classifier.classify(CandidateMeme(text="hello world", mode="classic"))
+        classified = classifier.classify(
+            CandidateMeme(text="hello world", mode="classic")
+        )
         assert classified.categories == ()
 
 
@@ -50,28 +54,48 @@ class TestRuleBasedModerator:
 
     def test_rejects_urls(self):
         candidate = CandidateMeme(
-            text="checkpoint at http://example.com", mode="classic", categories=("checkpoint_saved",)
+            text="checkpoint at http://example.com",
+            mode="classic",
+            categories=("checkpoint_saved",),
         )
         assert not RuleBasedModerator().moderate(candidate).approved
 
     def test_approves_clean_categorized_text(self):
-        candidate = CandidateMeme(text="checkpoint saved", mode="classic", categories=("checkpoint_saved",))
+        candidate = CandidateMeme(
+            text="checkpoint saved", mode="classic", categories=("checkpoint_saved",)
+        )
         assert RuleBasedModerator().moderate(candidate).approved
 
 
 class TestHeuristicRanker:
     def test_drops_near_duplicates_within_same_mode(self):
         candidates = [
-            CandidateMeme(text="checkpoint saved successfully", mode="classic", categories=("checkpoint_saved",)),
-            CandidateMeme(text="checkpoint saved successfully!", mode="classic", categories=("checkpoint_saved",)),
+            CandidateMeme(
+                text="checkpoint saved successfully",
+                mode="classic",
+                categories=("checkpoint_saved",),
+            ),
+            CandidateMeme(
+                text="checkpoint saved successfully!",
+                mode="classic",
+                categories=("checkpoint_saved",),
+            ),
         ]
         ranked = HeuristicRanker().rank(candidates)
         assert len(ranked) == 1
 
     def test_keeps_similar_text_across_different_modes(self):
         candidates = [
-            CandidateMeme(text="checkpoint saved successfully", mode="classic", categories=("checkpoint_saved",)),
-            CandidateMeme(text="checkpoint saved successfully", mode="roast", categories=("checkpoint_saved",)),
+            CandidateMeme(
+                text="checkpoint saved successfully",
+                mode="classic",
+                categories=("checkpoint_saved",),
+            ),
+            CandidateMeme(
+                text="checkpoint saved successfully",
+                mode="roast",
+                categories=("checkpoint_saved",),
+            ),
         ]
         ranked = HeuristicRanker().rank(candidates)
         assert len(ranked) == 2

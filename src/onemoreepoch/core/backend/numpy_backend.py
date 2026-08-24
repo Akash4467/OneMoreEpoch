@@ -133,9 +133,13 @@ class NumPyBackend(Backend):
         n, c, h, w = padded.shape
         h_out = (h - kh) // sh + 1
         w_out = (w - kw) // sw + 1
-        windows = np.lib.stride_tricks.sliding_window_view(padded, (kh, kw), axis=(2, 3))
+        windows = np.lib.stride_tricks.sliding_window_view(
+            padded, (kh, kw), axis=(2, 3)
+        )
         windows = windows[:, :, ::sh, ::sw, :, :]
-        cols = windows.transpose(0, 1, 4, 5, 2, 3).reshape(n, c * kh * kw, h_out * w_out)
+        cols = windows.transpose(0, 1, 4, 5, 2, 3).reshape(
+            n, c * kh * kw, h_out * w_out
+        )
         return np.ascontiguousarray(cols)
 
     def col2im(
@@ -157,7 +161,7 @@ class NumPyBackend(Backend):
         padded = np.zeros((n, c, h_padded, w_padded), dtype=cols.dtype)
         for i in range(kh):
             for j in range(kw):
-                padded[:, :, i : i + sh * h_out : sh, j : j + sw * w_out : sw] += (
-                    cols_reshaped[:, :, i, j, :, :]
-                )
+                padded[
+                    :, :, i : i + sh * h_out : sh, j : j + sw * w_out : sw
+                ] += cols_reshaped[:, :, i, j, :, :]
         return padded[:, :, ph : ph + h, pw : pw + w]

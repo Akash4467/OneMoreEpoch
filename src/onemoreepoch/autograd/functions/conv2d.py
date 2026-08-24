@@ -36,10 +36,14 @@ class Conv2DOp(Function):
 
         cols = backend.im2col(x, (kh, kw), (sh, sw), (ph, pw))  # (N, K, HW_out)
         weight_2d = backend.reshape(weight, (c_out, k))
-        cols_2d = backend.reshape(backend.transpose(cols, (1, 0, 2)), (k, n * h_out * w_out))
+        cols_2d = backend.reshape(
+            backend.transpose(cols, (1, 0, 2)), (k, n * h_out * w_out)
+        )
         out_2d = backend.matmul(weight_2d, cols_2d)  # (C_out, N*HW_out)
         out = backend.reshape(
-            backend.transpose(backend.reshape(out_2d, (c_out, n, h_out * w_out)), (1, 0, 2)),
+            backend.transpose(
+                backend.reshape(out_2d, (c_out, n, h_out * w_out)), (1, 0, 2)
+            ),
             (n, c_out, h_out, w_out),
         )
 
@@ -66,15 +70,23 @@ class Conv2DOp(Function):
         kh, kw = e["kernel_size"]
 
         grad_2d = backend.reshape(
-            backend.transpose(backend.reshape(grad, (n, c_out, h_out * w_out)), (1, 0, 2)),
+            backend.transpose(
+                backend.reshape(grad, (n, c_out, h_out * w_out)), (1, 0, 2)
+            ),
             (c_out, n * h_out * w_out),
         )
-        grad_weight_2d = backend.matmul(grad_2d, backend.transpose(cols_2d))  # (C_out, K)
-        grad_cols_2d = backend.matmul(backend.transpose(weight_2d), grad_2d)  # (K, N*HW_out)
+        grad_weight_2d = backend.matmul(
+            grad_2d, backend.transpose(cols_2d)
+        )  # (C_out, K)
+        grad_cols_2d = backend.matmul(
+            backend.transpose(weight_2d), grad_2d
+        )  # (K, N*HW_out)
         grad_cols = backend.transpose(
             backend.reshape(grad_cols_2d, (k, n, h_out * w_out)), (1, 0, 2)
         )  # (N, K, HW_out)
 
-        grad_x = backend.col2im(grad_cols, e["x_shape"], (kh, kw), e["stride"], e["padding"])
+        grad_x = backend.col2im(
+            grad_cols, e["x_shape"], (kh, kw), e["stride"], e["padding"]
+        )
         grad_weight = backend.reshape(grad_weight_2d, (c_out, e["x_shape"][1], kh, kw))
         return grad_x, grad_weight

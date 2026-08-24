@@ -27,7 +27,11 @@ class LocalFilePublisher(MemePublisher):
             "memes": [dataclasses.asdict(meme) for meme in catalog.memes],
         }
         tmp_path = self.output_path.with_suffix(".tmp")
-        tmp_path.write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8")
-        load_catalog(tmp_path)  # round-trip through the real validator before swapping in
+        tmp_path.write_text(
+            json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8"
+        )
+        load_catalog(
+            tmp_path
+        )  # round-trip through the real validator before swapping in
         os.replace(tmp_path, self.output_path)
         return self.output_path

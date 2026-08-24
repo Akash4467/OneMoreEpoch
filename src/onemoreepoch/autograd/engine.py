@@ -95,5 +95,3 @@ def _accumulate_into(tensor: "Tensor", grad: Any, backend: Any) -> None:
         tensor.grad = grad
     else:
         tensor.grad = backend.add(tensor.grad, grad)
-
-

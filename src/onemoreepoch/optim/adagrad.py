@@ -9,7 +9,9 @@ from onemoreepoch.optim.optimizer import Optimizer
 class AdaGrad(Optimizer):
     """G_t += g^2 (accumulated, never decayed); param -= lr * g / (sqrt(G_t) + eps)."""
 
-    def __init__(self, parameters: list[Parameter], lr: float = 0.01, eps: float = 1e-10) -> None:
+    def __init__(
+        self, parameters: list[Parameter], lr: float = 0.01, eps: float = 1e-10
+    ) -> None:
         super().__init__(parameters, lr)
         if eps <= 0.0:
             raise OptimizerError(
@@ -27,4 +29,6 @@ class AdaGrad(Optimizer):
         grad = param.grad
         accumulated = self._sum_sq.get(key, 0.0) + grad * grad
         self._sum_sq[key] = accumulated
-        param.data = param.data - self.lr * grad / (get_backend().sqrt(accumulated) + self.eps)
+        param.data = param.data - self.lr * grad / (
+            get_backend().sqrt(accumulated) + self.eps
+        )

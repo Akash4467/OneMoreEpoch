@@ -185,7 +185,9 @@ class RustBackend(Backend):
         padding: tuple[int, int],
     ) -> Any:
         np_cols = np.array(cols.tolist(), dtype=np.float64).reshape(cols.shape)
-        result = self._numpy_fallback.col2im(np_cols, input_shape, kernel_size, stride, padding)
+        result = self._numpy_fallback.col2im(
+            np_cols, input_shape, kernel_size, stride, padding
+        )
         return _to_rust_array(result)
 
 

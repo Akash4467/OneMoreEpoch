@@ -63,7 +63,9 @@ class TrainingLogger:
             and not self._increase_hint_shown
         ):
             self._increase_hint_shown = True
-            print(get_message("loss_increasing", count=self._increase_streak, value=loss))
+            print(
+                get_message("loss_increasing", count=self._increase_streak, value=loss)
+            )
 
 
 __all__ = ["TrainingLogger"]

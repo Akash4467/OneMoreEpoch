@@ -53,12 +53,8 @@ MESSAGES: dict[str, str] = {
         "Pass model.parameters() from a module that owns at least one "
         "Parameter."
     ),
-    "training_complete": (
-        "Training complete: {epochs} epochs, best loss {best:.6f}."
-    ),
-    "unknown_backend": (
-        "Unknown backend: {name!r}.\nAvailable backends: {available}."
-    ),
+    "training_complete": ("Training complete: {epochs} epochs, best loss {best:.6f}."),
+    "unknown_backend": ("Unknown backend: {name!r}.\nAvailable backends: {available}."),
     "rust_backend_unavailable": (
         "The Rust backend is not available.\n"
         "Build the native extension first (e.g. `maturin develop`), or "

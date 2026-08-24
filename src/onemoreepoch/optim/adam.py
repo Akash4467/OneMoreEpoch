@@ -6,7 +6,9 @@ from onemoreepoch.exceptions import OptimizerError
 from onemoreepoch.optim.optimizer import Optimizer
 
 
-def _check_range(optimizer: str, param: str, value: float, low: float, high: float) -> None:
+def _check_range(
+    optimizer: str, param: str, value: float, low: float, high: float
+) -> None:
     if not low <= value < high:
         raise OptimizerError(
             "optimizer_param_invalid",
@@ -59,4 +61,6 @@ class Adam(Optimizer):
         v_hat = v / (1 - self.beta2**t)
         # sqrt has no arithmetic-operator form; the one deliberate
         # backend call amid otherwise-raw `.data`/`.grad` arithmetic.
-        param.data = param.data - self.lr * m_hat / (get_backend().sqrt(v_hat) + self.eps)
+        param.data = param.data - self.lr * m_hat / (
+            get_backend().sqrt(v_hat) + self.eps
+        )

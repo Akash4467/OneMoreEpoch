@@ -30,8 +30,12 @@ def backends():
 class TestArrayCreation:
     def test_zeros_ones_full(self, backends):
         npb, rb = backends
-        np.testing.assert_allclose(_to_numpy(npb.zeros((2, 3))), _to_numpy(rb.zeros((2, 3))))
-        np.testing.assert_allclose(_to_numpy(npb.ones((2, 3))), _to_numpy(rb.ones((2, 3))))
+        np.testing.assert_allclose(
+            _to_numpy(npb.zeros((2, 3))), _to_numpy(rb.zeros((2, 3)))
+        )
+        np.testing.assert_allclose(
+            _to_numpy(npb.ones((2, 3))), _to_numpy(rb.ones((2, 3)))
+        )
         np.testing.assert_allclose(
             _to_numpy(npb.full((2, 2), 7.0)), _to_numpy(rb.full((2, 2), 7.0))
         )
@@ -39,7 +43,9 @@ class TestArrayCreation:
     def test_array_from_nested_list(self, backends):
         npb, rb = backends
         data = [[1.0, 2.0], [3.0, 4.0]]
-        np.testing.assert_allclose(_to_numpy(npb.array(data)), _to_numpy(rb.array(data)))
+        np.testing.assert_allclose(
+            _to_numpy(npb.array(data)), _to_numpy(rb.array(data))
+        )
 
 
 class TestArithmeticParity:
@@ -125,8 +131,12 @@ class TestReductionParity:
     @pytest.mark.parametrize("keepdims", [False, True])
     def test_reduction(self, backends, a, op, axis, keepdims):
         npb, rb = backends
-        np_result = _to_numpy(getattr(npb, op)(npb.array(a), axis=axis, keepdims=keepdims))
-        rust_result = _to_numpy(getattr(rb, op)(rb.array(a), axis=axis, keepdims=keepdims))
+        np_result = _to_numpy(
+            getattr(npb, op)(npb.array(a), axis=axis, keepdims=keepdims)
+        )
+        rust_result = _to_numpy(
+            getattr(rb, op)(rb.array(a), axis=axis, keepdims=keepdims)
+        )
         np.testing.assert_allclose(np_result, rust_result, atol=1e-8)
 
 
@@ -213,7 +223,8 @@ class TestFullPipelineParity:
             model = nn.Sequential(nn.Linear(3, 4), nn.ReLU(), nn.Linear(4, 1))
             weight_shapes = [p.shape for p in model.parameters()]
             fixed_weights = [
-                np.linspace(-0.5, 0.5, num=int(np.prod(s))).reshape(s) for s in weight_shapes
+                np.linspace(-0.5, 0.5, num=int(np.prod(s))).reshape(s)
+                for s in weight_shapes
             ]
             for param, values in zip(model.parameters(), fixed_weights):
                 param.data = registry_mod.get_backend().array(values)
