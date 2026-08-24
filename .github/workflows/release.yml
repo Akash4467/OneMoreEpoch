@@ -27,7 +27,10 @@ jobs:
         with:
           target: x86_64
           manylinux: auto
-          args: --release --out dist --find-interpreter
+          # Explicit interpreter, not --find-interpreter: runners also ship
+          # newer Pythons (3.13/3.14) that PyO3 0.22 doesn't support yet,
+          # and --find-interpreter would try (and fail) to build for those too.
+          args: --release --out dist -i 3.12
       - uses: actions/upload-artifact@v4
         with:
           name: wheels-linux
@@ -44,7 +47,10 @@ jobs:
         uses: PyO3/maturin-action@v1
         with:
           target: x64
-          args: --release --out dist --find-interpreter
+          # Explicit interpreter, not --find-interpreter: runners also ship
+          # newer Pythons (3.13/3.14) that PyO3 0.22 doesn't support yet,
+          # and --find-interpreter would try (and fail) to build for those too.
+          args: --release --out dist -i 3.12
       - uses: actions/upload-artifact@v4
         with:
           name: wheels-windows
@@ -61,7 +67,10 @@ jobs:
         uses: PyO3/maturin-action@v1
         with:
           target: universal2-apple-darwin
-          args: --release --out dist --find-interpreter
+          # Explicit interpreter, not --find-interpreter: runners also ship
+          # newer Pythons (3.13/3.14) that PyO3 0.22 doesn't support yet,
+          # and --find-interpreter would try (and fail) to build for those too.
+          args: --release --out dist -i 3.12
       - uses: actions/upload-artifact@v4
         with:
           name: wheels-macos
