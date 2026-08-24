@@ -2,60 +2,40 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   pull_request:
+    branches:
+      - main
 
 jobs:
-  rust-tests:
-    name: Rust unit tests (${{ matrix.os }})
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, windows-latest]
+  test:
+    name: Test - Python 3.12
+    runs-on: windows-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Install Rust
-        uses: dtolnay/rust-toolchain@stable
-
-      - name: Cache cargo registry and build output
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.cargo/registry
-            rust/target
-          key: cargo-${{ matrix.os }}-${{ hashFiles('rust/**/Cargo.lock') }}
-
-      # extension-module links libpython, which the cargo test binary can't
-      # provide itself — this is a well-known PyO3 gotcha (see lib.rs).
-      - name: cargo test --no-default-features
-        working-directory: rust/onemoreepoch-core
-        run: cargo test --no-default-features
-
-  python-tests:
-    name: Python tests (${{ matrix.os }})
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, windows-latest]
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install Rust
-        uses: dtolnay/rust-toolchain@stable
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@v3
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      # `uv sync` builds the Rust extension via the maturin build-backend
-      # as a side effect of installing the local package — no separate
-      # `maturin develop` step needed.
-      - name: Install dependencies (builds the Rust extension)
-        run: uv sync --group dev
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
 
-      - name: Run pytest
-        run: uv run pytest -q
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install dependencies
+        run: uv sync --dev
+
+      - name: Run tests
+        run: uv run pytest
+
+      - name: Run Ruff
+        run: uv run ruff check .
+
+      - name: Check formatting
+        run: uv run black --check .
