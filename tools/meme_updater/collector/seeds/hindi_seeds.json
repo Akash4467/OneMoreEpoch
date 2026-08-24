@@ -1,0 +1,14 @@
+[
+  {
+    "text": "Checkpoint save ho gaya, ab crash bhi ho jaye toh koi gham nahi.",
+    "mode": "hindi"
+  },
+  {
+    "text": "Overfit ho gaya model, training data yaad kar liya poora.",
+    "mode": "hindi"
+  },
+  {
+    "text": "Memory khatam, GPU ne haath khade kar diye.",
+    "mode": "hindi"
+  }
+]

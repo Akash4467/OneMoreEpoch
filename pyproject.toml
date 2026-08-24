@@ -1,8 +1,9 @@
 [project]
 name = "onemoreepoch"
-version = "0.1.0"
-description = "A minimal deep learning library built from scratch"
+version = "0.1.1"
+description = "A readable deep learning framework: Python API, Rust engine, real autograd"
 readme = "README.md"
+license = "MIT"
 authors = [
     { name = "Akash Bisht", email = "akashbisht2021@gmail.com" }
 ]
@@ -10,14 +11,47 @@ requires-python = ">=3.12"
 dependencies = [
     "numpy>=2.5.1",
 ]
+keywords = [
+    "deep-learning",
+    "machine-learning",
+    "autograd",
+    "neural-network",
+    "tensor",
+    "rust",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Rust",
+]
+
+[project.urls]
+Homepage = "https://github.com/Akash4467/OneMoreEpoch"
+Repository = "https://github.com/Akash4467/OneMoreEpoch"
+Issues = "https://github.com/Akash4467/OneMoreEpoch/issues"
 
 [build-system]
-requires = ["uv_build>=0.11.28,<0.12.0"]
-build-backend = "uv_build"
+requires = ["maturin>=1.7,<2.0"]
+build-backend = "maturin"
+
+[tool.maturin]
+manifest-path = "rust/onemoreepoch-core/Cargo.toml"
+module-name = "onemoreepoch._rustcore"
+python-source = "src"
+features = ["pyo3/extension-module"]
+include = [
+    { path = "src/onemoreepoch/messages/memes/data/*.json", format = "sdist" },
+    { path = "LICENSE", format = "sdist" },
+]
 
 [dependency-groups]
 dev = [
     "black>=26.5.1",
+    "maturin>=1.14.1",
     "pytest>=9.1.1",
     "ruff>=0.15.21",
+    "twine>=7.0.0",
 ]

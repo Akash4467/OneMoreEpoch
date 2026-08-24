@@ -1,0 +1,19 @@
+[package]
+name = "onemoreepoch-core"
+version = "0.1.1"
+edition = "2021"
+description = "Rust computational backend for OneMoreEpoch, exposed to Python via PyO3"
+license = "MIT"
+repository = "https://github.com/Akash4467/OneMoreEpoch"
+
+[lib]
+name = "onemoreepoch_core"
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+pyo3 = "0.22"
+rand = "0.8"
+
+[features]
+default = ["extension-module"]
+extension-module = ["pyo3/extension-module"]

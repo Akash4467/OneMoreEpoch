@@ -95,3 +95,18 @@ desktop.ini
 # Since OneMoreEpoch is a library, we don't
 # need to commit it.
 uv.lock
+
+# ==========================================
+# Rust
+# ==========================================
+
+rust/target/
+# Same rationale as uv.lock above: a library crate, not an application,
+# so we don't pin exact dependency versions in version control.
+rust/Cargo.lock
+
+# `maturin develop` (editable install) drops the compiled extension and
+# its debug symbols directly into the package source directory.
+src/onemoreepoch/*.pyd
+src/onemoreepoch/*.so
+src/onemoreepoch/*.pdb

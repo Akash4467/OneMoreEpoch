@@ -1,0 +1,1272 @@
+{
+  "schema_version": 1,
+  "catalog_version": "2026.08",
+  "generated_at": "2026-08-24T14:42:56.656575+00:00",
+  "memes": [
+    {
+      "id": "catalog-0000",
+      "text": "🚌 Ek tensor CPU mein baitha hai, doosra kahin aur - same bus mein aa jao dono.",
+      "mode": "hindi",
+      "categories": [
+        "device_error"
+      ],
+      "quality_score": 0.99,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0001",
+      "text": "Train loss is dropping but validation isn't. The model is memorizing, not learning.",
+      "mode": "classic",
+      "categories": [
+        "overfitting"
+      ],
+      "quality_score": 0.985,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0002",
+      "text": "Both train and validation loss are high. The model needs more capacity or training.",
+      "mode": "classic",
+      "categories": [
+        "underfitting"
+      ],
+      "quality_score": 0.985,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0003",
+      "text": "🚦 Dhoondh raha hoon gradient ko, mil hi nahi raha - graph tut gaya lagta hai.",
+      "mode": "hindi",
+      "categories": [
+        "gradient_error"
+      ],
+      "quality_score": 0.985,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0004",
+      "text": "🔥 Your model memorized the training set like it's cramming the night before an exam.",
+      "mode": "roast",
+      "categories": [
+        "overfitting"
+      ],
+      "quality_score": 0.98,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0005",
+      "text": "⚙ Optimizer ke settings mein hi locha hai, hyperparameters dobara check kar.",
+      "mode": "hindi",
+      "categories": [
+        "optimizer_error"
+      ],
+      "quality_score": 0.98,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0006",
+      "text": "Shapes didn't line up. Check your dimensions before the next forward pass.",
+      "mode": "classic",
+      "categories": [
+        "shape_error"
+      ],
+      "quality_score": 0.97,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0007",
+      "text": "🛑 Validation loss improve nahi ho raha — overfitting se bachne ke liye rukk rahe hain.",
+      "mode": "hindi",
+      "categories": [
+        "early_stopping"
+      ],
+      "quality_score": 0.97,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0008",
+      "text": "🎬 Dono shapes ka scene match nahi kar raha, poora climax alag reel se hai.",
+      "mode": "hindi",
+      "categories": [
+        "shape_error"
+      ],
+      "quality_score": 0.97,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0009",
+      "text": "🐌 Model freeze ho gaya lagta hai, movement hi nahi dikh raha seekhne mein.",
+      "mode": "hindi",
+      "categories": [
+        "underfitting"
+      ],
+      "quality_score": 0.97,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0010",
+      "text": "Something's off in the gradient flow. Check requires_grad and the graph.",
+      "mode": "classic",
+      "categories": [
+        "gradient_error"
+      ],
+      "quality_score": 0.96,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0011",
+      "text": "😪 Train aur validation dono ka loss high hai — model ko aur capacity ya training chahiye.",
+      "mode": "hindi",
+      "categories": [
+        "underfitting"
+      ],
+      "quality_score": 0.955,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0012",
+      "text": "Validation loss stopped improving. Stopping early to avoid overfitting.",
+      "mode": "classic",
+      "categories": [
+        "early_stopping"
+      ],
+      "quality_score": 0.955,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0013",
+      "text": "Backend/device mismatch. Make sure every tensor lives on the same one.",
+      "mode": "classic",
+      "categories": [
+        "device_error"
+      ],
+      "quality_score": 0.95,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0014",
+      "text": "🏁 Training's done. Whether it learned anything is a separate question.",
+      "mode": "roast",
+      "categories": [
+        "training_complete"
+      ],
+      "quality_score": 0.95,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0015",
+      "text": "📚 Train loss gir raha hai par validation nahi — model rata maar raha hai, seekh nahi raha.",
+      "mode": "hindi",
+      "categories": [
+        "overfitting"
+      ],
+      "quality_score": 0.95,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0016",
+      "text": "The gradient exploded, and so did my confidence in this learning rate.",
+      "mode": "classic",
+      "categories": [
+        "gradient_error"
+      ],
+      "quality_score": 0.95,
+      "source": "seed:classic_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0017",
+      "text": "🚦 Graph ka ek piece missing hai, isiliye gradient kahin nahi pahuncha.",
+      "mode": "hindi",
+      "categories": [
+        "gradient_error"
+      ],
+      "quality_score": 0.95,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0018",
+      "text": "🔥 Mixing dtypes and hoping NumPy sorts it out. Bold. Wrong, but bold.",
+      "mode": "roast",
+      "categories": [
+        "dtype_error"
+      ],
+      "quality_score": 0.945,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0019",
+      "text": "🎬 Wrong train pakad li tune, station hi alag hai - shapes match nahi.",
+      "mode": "hindi",
+      "categories": [
+        "shape_error"
+      ],
+      "quality_score": 0.945,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0020",
+      "text": "🎭 Dtype ka juice hi alag nikal raha hai - cast kar warna crash pakka.",
+      "mode": "hindi",
+      "categories": [
+        "dtype_error"
+      ],
+      "quality_score": 0.945,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0021",
+      "text": "📚 Model tota ban gaya, bas rata maar raha hai, samajh kuch nahi raha.",
+      "mode": "hindi",
+      "categories": [
+        "overfitting"
+      ],
+      "quality_score": 0.945,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0022",
+      "text": "📚 Poori kitaab yaad kar li, exam mein naya sawaal aaya toh phas gaya.",
+      "mode": "hindi",
+      "categories": [
+        "overfitting"
+      ],
+      "quality_score": 0.945,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0023",
+      "text": "🛑 Gradient flow mein locha hai — requires_grad aur graph check karo.",
+      "mode": "hindi",
+      "categories": [
+        "gradient_error"
+      ],
+      "quality_score": 0.94,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0024",
+      "text": "🤨 Optimizer ki configuration galat hai — hyperparameters check karo.",
+      "mode": "hindi",
+      "categories": [
+        "optimizer_error"
+      ],
+      "quality_score": 0.94,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0025",
+      "text": "NaN detected. Usually a learning rate or numerical stability issue.",
+      "mode": "classic",
+      "categories": [
+        "nan_error"
+      ],
+      "quality_score": 0.935,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0026",
+      "text": "🔥 Congratulations, your loss achieved a state of pure nonexistence.",
+      "mode": "roast",
+      "categories": [
+        "nan_error"
+      ],
+      "quality_score": 0.935,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0027",
+      "text": "📦 Memory khatam ho gayi — batch size chhota karo ya kuch free karo.",
+      "mode": "hindi",
+      "categories": [
+        "out_of_memory"
+      ],
+      "quality_score": 0.935,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0028",
+      "text": "🎭 Float aur int ek doosre ka role play kar rahe the, drama ho gaya.",
+      "mode": "hindi",
+      "categories": [
+        "dtype_error"
+      ],
+      "quality_score": 0.935,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0029",
+      "text": "🐌 Model itni slow speed se seekh raha hai, dono jagah fail ho raha.",
+      "mode": "hindi",
+      "categories": [
+        "underfitting"
+      ],
+      "quality_score": 0.935,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0030",
+      "text": "⚙ Optimizer start hi nahi ho raha, kuch toh missing hai setup mein.",
+      "mode": "hindi",
+      "categories": [
+        "optimizer_error"
+      ],
+      "quality_score": 0.935,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0031",
+      "text": "Training complete. Time to evaluate and see if it actually worked.",
+      "mode": "classic",
+      "categories": [
+        "training_complete"
+      ],
+      "quality_score": 0.9299999999999999,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0032",
+      "text": "⚠️ Kuch theek nahi lag raha — aage badhne se pehle dobara dekh lo.",
+      "mode": "hindi",
+      "categories": [
+        "general_warning"
+      ],
+      "quality_score": 0.9299999999999999,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0033",
+      "text": "📦 Bag itna bhar diya ki zip hi nahi lag rahi - batch size kam kar.",
+      "mode": "hindi",
+      "categories": [
+        "out_of_memory"
+      ],
+      "quality_score": 0.9299999999999999,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0034",
+      "text": "🐌 Half-cooked model hai ye, na training pe pakka na validation pe.",
+      "mode": "hindi",
+      "categories": [
+        "underfitting"
+      ],
+      "quality_score": 0.9299999999999999,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0035",
+      "text": "🔥 Your tensors just filed for divorce over irreconcilable shapes.",
+      "mode": "roast",
+      "categories": [
+        "shape_error"
+      ],
+      "quality_score": 0.925,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0036",
+      "text": "🎉 Training poori hui — ab evaluate karke dekho kaam kiya ya nahi.",
+      "mode": "hindi",
+      "categories": [
+        "training_complete"
+      ],
+      "quality_score": 0.925,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0037",
+      "text": "🎬 Dimensions ka poora natak chal raha hai, bas ek reshape kar de.",
+      "mode": "hindi",
+      "categories": [
+        "shape_error"
+      ],
+      "quality_score": 0.925,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0038",
+      "text": "🚌 Signal hi match nahi ho raha, saare tensors ek device pe le aa.",
+      "mode": "hindi",
+      "categories": [
+        "device_error"
+      ],
+      "quality_score": 0.925,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0039",
+      "text": "⚙ Hisaab hi galat laga diya optimizer ne - config check kar bhai.",
+      "mode": "hindi",
+      "categories": [
+        "optimizer_error"
+      ],
+      "quality_score": 0.925,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0040",
+      "text": "💀 NaN aa gaya — learning rate ya numerical stability check karo.",
+      "mode": "hindi",
+      "categories": [
+        "nan_error"
+      ],
+      "quality_score": 0.92,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0041",
+      "text": "🔥 You tried to fit an elephant into a shoebox. The shoebox lost.",
+      "mode": "roast",
+      "categories": [
+        "out_of_memory"
+      ],
+      "quality_score": 0.92,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0042",
+      "text": "Checkpoint save ho gaya, ab crash bhi ho jaye toh koi gham nahi.",
+      "mode": "hindi",
+      "categories": [
+        "checkpoint_saved"
+      ],
+      "quality_score": 0.92,
+      "source": "seed:hindi_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0043",
+      "text": "🛑 Bas yahi tak, aage ka rasta overfitting ki taraf jaa raha tha.",
+      "mode": "hindi",
+      "categories": [
+        "early_stopping"
+      ],
+      "quality_score": 0.92,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0044",
+      "text": "⚙ Sab knobs galat jagah set kar diye, optimizer confuse ho gaya.",
+      "mode": "hindi",
+      "categories": [
+        "optimizer_error"
+      ],
+      "quality_score": 0.92,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0045",
+      "text": "Dtype mismatch. Cast explicitly instead of hoping for the best.",
+      "mode": "classic",
+      "categories": [
+        "dtype_error"
+      ],
+      "quality_score": 0.915,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0046",
+      "text": "Optimizer configuration is invalid. Check your hyperparameters.",
+      "mode": "classic",
+      "categories": [
+        "optimizer_error"
+      ],
+      "quality_score": 0.915,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0047",
+      "text": "Checkpoint written to disk — this run is officially not wasted.",
+      "mode": "classic",
+      "categories": [
+        "checkpoint_saved"
+      ],
+      "quality_score": 0.915,
+      "source": "seed:classic_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0048",
+      "text": "🎬 (3,4) aur (5,2) - inki toh kabhi shaadi hi tay nahi thi bhai.",
+      "mode": "hindi",
+      "categories": [
+        "shape_error"
+      ],
+      "quality_score": 0.915,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0049",
+      "text": "🎭 Int ko float samajh liya tune, ab confusion hi confusion hai.",
+      "mode": "hindi",
+      "categories": [
+        "dtype_error"
+      ],
+      "quality_score": 0.915,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0050",
+      "text": "👻 Numbers overflow ho ke seedha NaN ke samundar mein doob gaye.",
+      "mode": "hindi",
+      "categories": [
+        "nan_error"
+      ],
+      "quality_score": 0.915,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0051",
+      "text": "🔒 Yahan tak ka safar pin ho gaya, restart se dar nahi lagta ab.",
+      "mode": "hindi",
+      "categories": [
+        "checkpoint_saved"
+      ],
+      "quality_score": 0.915,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0052",
+      "text": "🤨 Dtype match nahi hua — explicitly cast karo, guess mat karo.",
+      "mode": "hindi",
+      "categories": [
+        "dtype_error"
+      ],
+      "quality_score": 0.91,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0053",
+      "text": "🔥 Your gradients took a wrong turn somewhere around layer two.",
+      "mode": "roast",
+      "categories": [
+        "gradient_error"
+      ],
+      "quality_score": 0.91,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0054",
+      "text": "🔥 This isn't broken yet, but it's giving 'about to be broken.'",
+      "mode": "roast",
+      "categories": [
+        "general_warning"
+      ],
+      "quality_score": 0.91,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0055",
+      "text": "📚 Training data pe perfect acting, real duniya mein flop show.",
+      "mode": "hindi",
+      "categories": [
+        "overfitting"
+      ],
+      "quality_score": 0.91,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0056",
+      "text": "🚦 Gradient signal pe hi ruk gaya, requires_grad check kar le.",
+      "mode": "hindi",
+      "categories": [
+        "gradient_error"
+      ],
+      "quality_score": 0.905,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0057",
+      "text": "🏁 The End - lekin sequel (agla training run) toh aana hi hai.",
+      "mode": "hindi",
+      "categories": [
+        "training_complete"
+      ],
+      "quality_score": 0.905,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0058",
+      "text": "🏁 Training wrap ho gaya, ab bas fingers crossed for accuracy.",
+      "mode": "hindi",
+      "categories": [
+        "training_complete"
+      ],
+      "quality_score": 0.905,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0059",
+      "text": "🚨 Signal thoda off lag raha hai, aage badhne se pehle ruk ja.",
+      "mode": "hindi",
+      "categories": [
+        "general_warning"
+      ],
+      "quality_score": 0.905,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0060",
+      "text": "🔥 Your optimizer config is held together by hope and a typo.",
+      "mode": "roast",
+      "categories": [
+        "optimizer_error"
+      ],
+      "quality_score": 0.9,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0061",
+      "text": "Something looks off — worth a second look before continuing.",
+      "mode": "classic",
+      "categories": [
+        "general_warning"
+      ],
+      "quality_score": 0.9,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0062",
+      "text": "🔒 Game save ho gaya, agla level try karne ka himmat aa gayi.",
+      "mode": "hindi",
+      "categories": [
+        "checkpoint_saved"
+      ],
+      "quality_score": 0.9,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0063",
+      "text": "📚 Dimag mein sirf training data ghus gaya, baaki sab bahar.",
+      "mode": "hindi",
+      "categories": [
+        "overfitting"
+      ],
+      "quality_score": 0.895,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0064",
+      "text": "🚨 Kuch missing lag raha hai yahan, ek baar aur nazar daal.",
+      "mode": "hindi",
+      "categories": [
+        "general_warning"
+      ],
+      "quality_score": 0.89,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0065",
+      "text": "🚨 Shapes ka mel nahi hua bhai, dimensions dobara dekh lo.",
+      "mode": "hindi",
+      "categories": [
+        "shape_error"
+      ],
+      "quality_score": 0.885,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0066",
+      "text": "Overfit ho gaya model, training data yaad kar liya poora.",
+      "mode": "hindi",
+      "categories": [
+        "overfitting"
+      ],
+      "quality_score": 0.885,
+      "source": "seed:hindi_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0067",
+      "text": "📦 Memory ne darwaza band kar diya bhai, andar jagah nahi.",
+      "mode": "hindi",
+      "categories": [
+        "out_of_memory"
+      ],
+      "quality_score": 0.885,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0068",
+      "text": "Nan loss again. Truly a masterclass in achieving nothing.",
+      "mode": "roast",
+      "categories": [
+        "nan_error"
+      ],
+      "quality_score": 0.885,
+      "source": "seed:roast_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0069",
+      "text": "📟 Device ka jhamela hai — sab tensors ek hi jagah rakho.",
+      "mode": "hindi",
+      "categories": [
+        "device_error"
+      ],
+      "quality_score": 0.88,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0070",
+      "text": "Out of memory. Reduce batch size or free unused tensors.",
+      "mode": "classic",
+      "categories": [
+        "out_of_memory"
+      ],
+      "quality_score": 0.88,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0071",
+      "text": "Early stopping kicked in before things got embarrassing.",
+      "mode": "classic",
+      "categories": [
+        "early_stopping"
+      ],
+      "quality_score": 0.88,
+      "source": "seed:classic_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0072",
+      "text": "🎬 Ye shapes ek doosre ko dekh ke bhi pehchaan nahi rahe.",
+      "mode": "hindi",
+      "categories": [
+        "shape_error"
+      ],
+      "quality_score": 0.88,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0073",
+      "text": "🚦 Backward call kiya par gradient ne reply hi nahi diya.",
+      "mode": "hindi",
+      "categories": [
+        "gradient_error"
+      ],
+      "quality_score": 0.88,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0074",
+      "text": "📦 Ek aur tensor daala aur deewar gir gayi - OOM ho gaya.",
+      "mode": "hindi",
+      "categories": [
+        "out_of_memory"
+      ],
+      "quality_score": 0.88,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0075",
+      "text": "🛑 Time pe brake laga di, aage overfitting ka signal tha.",
+      "mode": "hindi",
+      "categories": [
+        "early_stopping"
+      ],
+      "quality_score": 0.88,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0076",
+      "text": "🛑 Bhaagte bhaagte ruk gaye, sahi mauke pe sahi decision.",
+      "mode": "hindi",
+      "categories": [
+        "early_stopping"
+      ],
+      "quality_score": 0.88,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0077",
+      "text": "🚨 Kuch to gadbad hai, aage badhne se pehle check kar le.",
+      "mode": "hindi",
+      "categories": [
+        "general_warning"
+      ],
+      "quality_score": 0.88,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0078",
+      "text": "🚨 Ye scene thoda suspicious lag raha hai, dhyan se dekh.",
+      "mode": "hindi",
+      "categories": [
+        "general_warning"
+      ],
+      "quality_score": 0.88,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0079",
+      "text": "🔒 Progress lock ho gaya, ab crash bhi ho toh gham nahi.",
+      "mode": "hindi",
+      "categories": [
+        "checkpoint_saved"
+      ],
+      "quality_score": 0.875,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0080",
+      "text": "The optimizer diverged faster than your attention span.",
+      "mode": "roast",
+      "categories": [
+        "optimizer_error"
+      ],
+      "quality_score": 0.875,
+      "source": "seed:roast_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0081",
+      "text": "🔥 Half your tensors are on one backend, half on vibes.",
+      "mode": "roast",
+      "categories": [
+        "device_error"
+      ],
+      "quality_score": 0.87,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0082",
+      "text": "Underfitting so hard the model gave up before you did.",
+      "mode": "roast",
+      "categories": [
+        "underfitting"
+      ],
+      "quality_score": 0.87,
+      "source": "seed:roast_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0083",
+      "text": "🔥 Quitting while you're ahead. Rare, but respectable.",
+      "mode": "roast",
+      "categories": [
+        "early_stopping"
+      ],
+      "quality_score": 0.865,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0084",
+      "text": "🐌 Model abhi tak so hi raha hai, kuch seekha hi nahi.",
+      "mode": "hindi",
+      "categories": [
+        "underfitting"
+      ],
+      "quality_score": 0.865,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0085",
+      "text": "👻 Model ko chakkar aa gaya, output NaN de raha hai.",
+      "mode": "hindi",
+      "categories": [
+        "nan_error"
+      ],
+      "quality_score": 0.855,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0086",
+      "text": "🚌 Tensor ka saman galat station pe utar gaya bhai.",
+      "mode": "hindi",
+      "categories": [
+        "device_error"
+      ],
+      "quality_score": 0.85,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0087",
+      "text": "🛑 Cut! Yahi best take tha, aage retakes bekar the.",
+      "mode": "hindi",
+      "categories": [
+        "early_stopping"
+      ],
+      "quality_score": 0.85,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0088",
+      "text": "🎭 Guessing games band kar, dtype explicitly bata.",
+      "mode": "hindi",
+      "categories": [
+        "dtype_error"
+      ],
+      "quality_score": 0.845,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0089",
+      "text": "🚌 Connection hi nahi ban raha, device shift kar.",
+      "mode": "hindi",
+      "categories": [
+        "device_error"
+      ],
+      "quality_score": 0.84,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0090",
+      "text": "👻 NaN ne poori training ko haunt kar diya bhai.",
+      "mode": "hindi",
+      "categories": [
+        "nan_error"
+      ],
+      "quality_score": 0.835,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0091",
+      "text": "📦 RAM mein jagah hi nahi bachi, ghar khali kar.",
+      "mode": "hindi",
+      "categories": [
+        "out_of_memory"
+      ],
+      "quality_score": 0.835,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0092",
+      "text": "💾 Checkpoint save ho gaya — progress safe hai.",
+      "mode": "hindi",
+      "categories": [
+        "checkpoint_saved"
+      ],
+      "quality_score": 0.83,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0093",
+      "text": "🏁 Poora safar ho gaya, ab result ka samay hai.",
+      "mode": "hindi",
+      "categories": [
+        "training_complete"
+      ],
+      "quality_score": 0.83,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0094",
+      "text": "🔁 Ek target aur clear, chalo aage badhte hain.",
+      "mode": "hindi",
+      "categories": [
+        "epoch_complete"
+      ],
+      "quality_score": 0.83,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0095",
+      "text": "🔥 Your model isn't even trying at this point.",
+      "mode": "roast",
+      "categories": [
+        "underfitting"
+      ],
+      "quality_score": 0.825,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0096",
+      "text": "🔥 Checkpoint saved. At least THAT went right.",
+      "mode": "roast",
+      "categories": [
+        "checkpoint_saved"
+      ],
+      "quality_score": 0.825,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0097",
+      "text": "👻 Loss NaN ho gaya, gubbara phat gaya samjho.",
+      "mode": "hindi",
+      "categories": [
+        "nan_error"
+      ],
+      "quality_score": 0.825,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0098",
+      "text": "🔁 Epoch ka ek chapter khatam, agla open kar.",
+      "mode": "hindi",
+      "categories": [
+        "epoch_complete"
+      ],
+      "quality_score": 0.8200000000000001,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0099",
+      "text": "🔁 Ek seedhi aur chadh li, upar dekhte rehna.",
+      "mode": "hindi",
+      "categories": [
+        "epoch_complete"
+      ],
+      "quality_score": 0.8200000000000001,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0100",
+      "text": "🔒 Safety pin lag gaya, ab kuch bhi ho jaaye.",
+      "mode": "hindi",
+      "categories": [
+        "checkpoint_saved"
+      ],
+      "quality_score": 0.8200000000000001,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0101",
+      "text": "Memory khatam, GPU ne haath khade kar diye.",
+      "mode": "hindi",
+      "categories": [
+        "out_of_memory"
+      ],
+      "quality_score": 0.815,
+      "source": "seed:hindi_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0102",
+      "text": "✅ Epoch complete — agla shuru karte hain.",
+      "mode": "hindi",
+      "categories": [
+        "epoch_complete"
+      ],
+      "quality_score": 0.8049999999999999,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0103",
+      "text": "Checkpoint saved. Your progress is safe.",
+      "mode": "classic",
+      "categories": [
+        "checkpoint_saved"
+      ],
+      "quality_score": 0.8,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0104",
+      "text": "💯 Kaam ban gaya bhai, full satisfaction.",
+      "mode": "hindi",
+      "categories": [
+        "general_success"
+      ],
+      "quality_score": 0.8,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0105",
+      "text": "💯 Seedha target pe laga, koi issue nahi.",
+      "mode": "hindi",
+      "categories": [
+        "general_success"
+      ],
+      "quality_score": 0.8,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0106",
+      "text": "🏁 Pura movie khatam, ab review ka time.",
+      "mode": "hindi",
+      "categories": [
+        "training_complete"
+      ],
+      "quality_score": 0.795,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0107",
+      "text": "🔥 One epoch down. Progress, allegedly.",
+      "mode": "roast",
+      "categories": [
+        "epoch_complete"
+      ],
+      "quality_score": 0.79,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0108",
+      "text": "🔁 Ek aur round ho gaya, agla load kar.",
+      "mode": "hindi",
+      "categories": [
+        "epoch_complete"
+      ],
+      "quality_score": 0.79,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0109",
+      "text": "💯 Sab kuch smooth chala, tension free.",
+      "mode": "hindi",
+      "categories": [
+        "general_success"
+      ],
+      "quality_score": 0.79,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0110",
+      "text": "💯 Bilkul sahi chala, ekdum on point.",
+      "mode": "hindi",
+      "categories": [
+        "general_success"
+      ],
+      "quality_score": 0.78,
+      "source": "seed:hindi_trending_seeds.json",
+      "created_at": "2026-08-24T14:42:56.656575+00:00"
+    },
+    {
+      "id": "catalog-0111",
+      "text": "Epoch complete. On to the next one.",
+      "mode": "classic",
+      "categories": [
+        "epoch_complete"
+      ],
+      "quality_score": 0.775,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0112",
+      "text": "🔥 It worked. Don't get used to it.",
+      "mode": "roast",
+      "categories": [
+        "general_success"
+      ],
+      "quality_score": 0.77,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0113",
+      "text": "That worked as expected.",
+      "mode": "classic",
+      "categories": [
+        "general_success"
+      ],
+      "quality_score": 0.72,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    },
+    {
+      "id": "catalog-0114",
+      "text": "✅ Sab sahi chala.",
+      "mode": "hindi",
+      "categories": [
+        "general_success"
+      ],
+      "quality_score": 0.685,
+      "source": "seed:local",
+      "created_at": "2026-08-24T00:00:00Z"
+    }
+  ]
+}

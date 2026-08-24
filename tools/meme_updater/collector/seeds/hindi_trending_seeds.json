@@ -1,0 +1,429 @@
+[
+  {
+    "text": "🎬 Dono shapes ka scene match nahi kar raha, poora climax alag reel se hai.",
+    "mode": "hindi",
+    "categories": [
+      "shape_error"
+    ]
+  },
+  {
+    "text": "🎬 (3,4) aur (5,2) - inki toh kabhi shaadi hi tay nahi thi bhai.",
+    "mode": "hindi",
+    "categories": [
+      "shape_error"
+    ]
+  },
+  {
+    "text": "🎬 Dimensions ka poora natak chal raha hai, bas ek reshape kar de.",
+    "mode": "hindi",
+    "categories": [
+      "shape_error"
+    ]
+  },
+  {
+    "text": "🎬 Wrong train pakad li tune, station hi alag hai - shapes match nahi.",
+    "mode": "hindi",
+    "categories": [
+      "shape_error"
+    ]
+  },
+  {
+    "text": "🎬 Ye shapes ek doosre ko dekh ke bhi pehchaan nahi rahe.",
+    "mode": "hindi",
+    "categories": [
+      "shape_error"
+    ]
+  },
+  {
+    "text": "🎭 Float aur int ek doosre ka role play kar rahe the, drama ho gaya.",
+    "mode": "hindi",
+    "categories": [
+      "dtype_error"
+    ]
+  },
+  {
+    "text": "🎭 Dtype ka juice hi alag nikal raha hai - cast kar warna crash pakka.",
+    "mode": "hindi",
+    "categories": [
+      "dtype_error"
+    ]
+  },
+  {
+    "text": "🎭 Guessing games band kar, dtype explicitly bata.",
+    "mode": "hindi",
+    "categories": [
+      "dtype_error"
+    ]
+  },
+  {
+    "text": "🎭 Int ko float samajh liya tune, ab confusion hi confusion hai.",
+    "mode": "hindi",
+    "categories": [
+      "dtype_error"
+    ]
+  },
+  {
+    "text": "🚌 Ek tensor CPU mein baitha hai, doosra kahin aur - same bus mein aa jao dono.",
+    "mode": "hindi",
+    "categories": [
+      "device_error"
+    ]
+  },
+  {
+    "text": "🚌 Signal hi match nahi ho raha, saare tensors ek device pe le aa.",
+    "mode": "hindi",
+    "categories": [
+      "device_error"
+    ]
+  },
+  {
+    "text": "🚌 Tensor ka saman galat station pe utar gaya bhai.",
+    "mode": "hindi",
+    "categories": [
+      "device_error"
+    ]
+  },
+  {
+    "text": "🚌 Connection hi nahi ban raha, device shift kar.",
+    "mode": "hindi",
+    "categories": [
+      "device_error"
+    ]
+  },
+  {
+    "text": "🚦 Gradient signal pe hi ruk gaya, requires_grad check kar le.",
+    "mode": "hindi",
+    "categories": [
+      "gradient_error"
+    ]
+  },
+  {
+    "text": "🚦 Graph ka ek piece missing hai, isiliye gradient kahin nahi pahuncha.",
+    "mode": "hindi",
+    "categories": [
+      "gradient_error"
+    ]
+  },
+  {
+    "text": "🚦 Backward call kiya par gradient ne reply hi nahi diya.",
+    "mode": "hindi",
+    "categories": [
+      "gradient_error"
+    ]
+  },
+  {
+    "text": "🚦 Dhoondh raha hoon gradient ko, mil hi nahi raha - graph tut gaya lagta hai.",
+    "mode": "hindi",
+    "categories": [
+      "gradient_error"
+    ]
+  },
+  {
+    "text": "👻 NaN ne poori training ko haunt kar diya bhai.",
+    "mode": "hindi",
+    "categories": [
+      "nan_error"
+    ]
+  },
+  {
+    "text": "👻 Numbers overflow ho ke seedha NaN ke samundar mein doob gaye.",
+    "mode": "hindi",
+    "categories": [
+      "nan_error"
+    ]
+  },
+  {
+    "text": "👻 Loss NaN ho gaya, gubbara phat gaya samjho.",
+    "mode": "hindi",
+    "categories": [
+      "nan_error"
+    ]
+  },
+  {
+    "text": "👻 Model ko chakkar aa gaya, output NaN de raha hai.",
+    "mode": "hindi",
+    "categories": [
+      "nan_error"
+    ]
+  },
+  {
+    "text": "📦 RAM mein jagah hi nahi bachi, ghar khali kar.",
+    "mode": "hindi",
+    "categories": [
+      "out_of_memory"
+    ]
+  },
+  {
+    "text": "📦 Bag itna bhar diya ki zip hi nahi lag rahi - batch size kam kar.",
+    "mode": "hindi",
+    "categories": [
+      "out_of_memory"
+    ]
+  },
+  {
+    "text": "📦 Memory ne darwaza band kar diya bhai, andar jagah nahi.",
+    "mode": "hindi",
+    "categories": [
+      "out_of_memory"
+    ]
+  },
+  {
+    "text": "📦 Ek aur tensor daala aur deewar gir gayi - OOM ho gaya.",
+    "mode": "hindi",
+    "categories": [
+      "out_of_memory"
+    ]
+  },
+  {
+    "text": "🏁 Poora safar ho gaya, ab result ka samay hai.",
+    "mode": "hindi",
+    "categories": [
+      "training_complete"
+    ]
+  },
+  {
+    "text": "🏁 The End - lekin sequel (agla training run) toh aana hi hai.",
+    "mode": "hindi",
+    "categories": [
+      "training_complete"
+    ]
+  },
+  {
+    "text": "🏁 Training wrap ho gaya, ab bas fingers crossed for accuracy.",
+    "mode": "hindi",
+    "categories": [
+      "training_complete"
+    ]
+  },
+  {
+    "text": "🏁 Pura movie khatam, ab review ka time.",
+    "mode": "hindi",
+    "categories": [
+      "training_complete"
+    ]
+  },
+  {
+    "text": "🔁 Ek aur round ho gaya, agla load kar.",
+    "mode": "hindi",
+    "categories": [
+      "epoch_complete"
+    ]
+  },
+  {
+    "text": "🔁 Epoch ka ek chapter khatam, agla open kar.",
+    "mode": "hindi",
+    "categories": [
+      "epoch_complete"
+    ]
+  },
+  {
+    "text": "🔁 Ek target aur clear, chalo aage badhte hain.",
+    "mode": "hindi",
+    "categories": [
+      "epoch_complete"
+    ]
+  },
+  {
+    "text": "🔁 Ek seedhi aur chadh li, upar dekhte rehna.",
+    "mode": "hindi",
+    "categories": [
+      "epoch_complete"
+    ]
+  },
+  {
+    "text": "📚 Model tota ban gaya, bas rata maar raha hai, samajh kuch nahi raha.",
+    "mode": "hindi",
+    "categories": [
+      "overfitting"
+    ]
+  },
+  {
+    "text": "📚 Poori kitaab yaad kar li, exam mein naya sawaal aaya toh phas gaya.",
+    "mode": "hindi",
+    "categories": [
+      "overfitting"
+    ]
+  },
+  {
+    "text": "📚 Training data pe perfect acting, real duniya mein flop show.",
+    "mode": "hindi",
+    "categories": [
+      "overfitting"
+    ]
+  },
+  {
+    "text": "📚 Dimag mein sirf training data ghus gaya, baaki sab bahar.",
+    "mode": "hindi",
+    "categories": [
+      "overfitting"
+    ]
+  },
+  {
+    "text": "🐌 Model itni slow speed se seekh raha hai, dono jagah fail ho raha.",
+    "mode": "hindi",
+    "categories": [
+      "underfitting"
+    ]
+  },
+  {
+    "text": "🐌 Half-cooked model hai ye, na training pe pakka na validation pe.",
+    "mode": "hindi",
+    "categories": [
+      "underfitting"
+    ]
+  },
+  {
+    "text": "🐌 Model abhi tak so hi raha hai, kuch seekha hi nahi.",
+    "mode": "hindi",
+    "categories": [
+      "underfitting"
+    ]
+  },
+  {
+    "text": "🐌 Model freeze ho gaya lagta hai, movement hi nahi dikh raha seekhne mein.",
+    "mode": "hindi",
+    "categories": [
+      "underfitting"
+    ]
+  },
+  {
+    "text": "🛑 Time pe brake laga di, aage overfitting ka signal tha.",
+    "mode": "hindi",
+    "categories": [
+      "early_stopping"
+    ]
+  },
+  {
+    "text": "🛑 Bhaagte bhaagte ruk gaye, sahi mauke pe sahi decision.",
+    "mode": "hindi",
+    "categories": [
+      "early_stopping"
+    ]
+  },
+  {
+    "text": "🛑 Bas yahi tak, aage ka rasta overfitting ki taraf jaa raha tha.",
+    "mode": "hindi",
+    "categories": [
+      "early_stopping"
+    ]
+  },
+  {
+    "text": "🛑 Cut! Yahi best take tha, aage retakes bekar the.",
+    "mode": "hindi",
+    "categories": [
+      "early_stopping"
+    ]
+  },
+  {
+    "text": "🔒 Progress lock ho gaya, ab crash bhi ho toh gham nahi.",
+    "mode": "hindi",
+    "categories": [
+      "checkpoint_saved"
+    ]
+  },
+  {
+    "text": "🔒 Yahan tak ka safar pin ho gaya, restart se dar nahi lagta ab.",
+    "mode": "hindi",
+    "categories": [
+      "checkpoint_saved"
+    ]
+  },
+  {
+    "text": "🔒 Game save ho gaya, agla level try karne ka himmat aa gayi.",
+    "mode": "hindi",
+    "categories": [
+      "checkpoint_saved"
+    ]
+  },
+  {
+    "text": "🔒 Safety pin lag gaya, ab kuch bhi ho jaaye.",
+    "mode": "hindi",
+    "categories": [
+      "checkpoint_saved"
+    ]
+  },
+  {
+    "text": "⚙ Optimizer ke settings mein hi locha hai, hyperparameters dobara check kar.",
+    "mode": "hindi",
+    "categories": [
+      "optimizer_error"
+    ]
+  },
+  {
+    "text": "⚙ Sab knobs galat jagah set kar diye, optimizer confuse ho gaya.",
+    "mode": "hindi",
+    "categories": [
+      "optimizer_error"
+    ]
+  },
+  {
+    "text": "⚙ Hisaab hi galat laga diya optimizer ne - config check kar bhai.",
+    "mode": "hindi",
+    "categories": [
+      "optimizer_error"
+    ]
+  },
+  {
+    "text": "⚙ Optimizer start hi nahi ho raha, kuch toh missing hai setup mein.",
+    "mode": "hindi",
+    "categories": [
+      "optimizer_error"
+    ]
+  },
+  {
+    "text": "💯 Bilkul sahi chala, ekdum on point.",
+    "mode": "hindi",
+    "categories": [
+      "general_success"
+    ]
+  },
+  {
+    "text": "💯 Kaam ban gaya bhai, full satisfaction.",
+    "mode": "hindi",
+    "categories": [
+      "general_success"
+    ]
+  },
+  {
+    "text": "💯 Seedha target pe laga, koi issue nahi.",
+    "mode": "hindi",
+    "categories": [
+      "general_success"
+    ]
+  },
+  {
+    "text": "💯 Sab kuch smooth chala, tension free.",
+    "mode": "hindi",
+    "categories": [
+      "general_success"
+    ]
+  },
+  {
+    "text": "🚨 Kuch to gadbad hai, aage badhne se pehle check kar le.",
+    "mode": "hindi",
+    "categories": [
+      "general_warning"
+    ]
+  },
+  {
+    "text": "🚨 Ye scene thoda suspicious lag raha hai, dhyan se dekh.",
+    "mode": "hindi",
+    "categories": [
+      "general_warning"
+    ]
+  },
+  {
+    "text": "🚨 Kuch missing lag raha hai yahan, ek baar aur nazar daal.",
+    "mode": "hindi",
+    "categories": [
+      "general_warning"
+    ]
+  },
+  {
+    "text": "🚨 Signal thoda off lag raha hai, aage badhne se pehle ruk ja.",
+    "mode": "hindi",
+    "categories": [
+      "general_warning"
+    ]
+  }
+]

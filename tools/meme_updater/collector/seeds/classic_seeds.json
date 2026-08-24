@@ -1,0 +1,14 @@
+[
+  {
+    "text": "Checkpoint written to disk — this run is officially not wasted.",
+    "mode": "classic"
+  },
+  {
+    "text": "The gradient exploded, and so did my confidence in this learning rate.",
+    "mode": "classic"
+  },
+  {
+    "text": "Early stopping kicked in before things got embarrassing.",
+    "mode": "classic"
+  }
+]
