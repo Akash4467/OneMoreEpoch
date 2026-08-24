@@ -4,8 +4,8 @@ import numpy as np
 import pytest
 
 from onemoreepoch import nn
-from onemoreepoch.core.backend import get_backend
 from onemoreepoch.core import Parameter, Tensor
+from onemoreepoch.core.backend import get_backend
 from onemoreepoch.exceptions import OptimizerError
 from onemoreepoch.optim import SGD, AdaGrad, Adam, AdamW, Optimizer, RMSProp
 

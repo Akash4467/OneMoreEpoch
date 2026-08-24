@@ -54,7 +54,8 @@ class TestCatalogValidation:
                 }
             )
         )
-        with pytest.raises(Exception):
+        # The raised type is a private, unexported class - assert on Exception.
+        with pytest.raises(Exception):  # noqa: B017
             load_catalog(bad)
 
     def test_missing_file_falls_back_to_default(self, tmp_path):

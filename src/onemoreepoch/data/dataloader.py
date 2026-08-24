@@ -6,7 +6,7 @@ manipulation" role the doc reserves for NumPy (§10), not a backend
 circumvention.
 """
 
-from typing import Iterator
+from collections.abc import Iterator
 
 import numpy as np
 

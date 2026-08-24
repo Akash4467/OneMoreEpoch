@@ -71,7 +71,7 @@ def get_meme(category: str | None) -> str | None:
         return None
     try:
         return _selector.select(category, config.get_message_mode())
-    except Exception:
+    except Exception:  # noqa: BLE001 - a meme failure must never propagate
         return None
 
 

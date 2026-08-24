@@ -7,7 +7,7 @@ here, deliberately (see package docstring).
 """
 
 from abc import ABC, abstractmethod
-from typing import Iterable
+from collections.abc import Iterable
 
 from tools.meme_updater.models import CandidateMeme
 

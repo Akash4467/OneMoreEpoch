@@ -1,7 +1,7 @@
 """Loss functions."""
 
-from onemoreepoch.core.tensor import Tensor
 from onemoreepoch.core.module import Module
+from onemoreepoch.core.tensor import Tensor
 
 
 class MSELoss(Module):

@@ -6,7 +6,7 @@ publishing, so running the updater never discards previously curated
 content — only adds to it and drops near-duplicates.
 """
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 from onemoreepoch.messages.memes.catalog import load_active_catalog
@@ -21,7 +21,7 @@ from tools.meme_updater.ranker.heuristic import HeuristicRanker
 
 def run(output_path: Path) -> Path:
     """Run the full pipeline once and publish the resulting catalog."""
-    now = datetime.now(timezone.utc)
+    now = datetime.now(UTC)
 
     existing = load_active_catalog(output_path if output_path.exists() else None)
     existing_candidates = [

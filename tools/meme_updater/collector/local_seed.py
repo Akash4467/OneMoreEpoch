@@ -1,8 +1,8 @@
 """Reads candidate text from bundled, self-authored JSON seed files."""
 
 import json
+from collections.abc import Iterable
 from pathlib import Path
-from typing import Iterable
 
 from tools.meme_updater.collector.base import MemeCollector
 from tools.meme_updater.models import CandidateMeme

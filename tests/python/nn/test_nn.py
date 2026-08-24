@@ -152,7 +152,7 @@ class TestConv2D:
             from onemoreepoch.core.backend.numpy_backend import NumPyBackend
 
             backend = NumPyBackend()
-            n, c, h, wd = x.shape
+            n, _c, h, wd = x.shape
             co, k = w.shape[0], w.shape[1] * w.shape[2] * w.shape[3]
             cols = backend.im2col(x, (3, 3), (2, 2), (1, 1))
             ho = (h + 2 - 3) // 2 + 1

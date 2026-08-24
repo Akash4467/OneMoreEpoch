@@ -63,7 +63,7 @@ class TestCatalogConsistency:
             assert set(module.MESSAGES) == expected, f"{name} keys differ"
 
     def test_all_templates_format_cleanly(self):
-        for name, module in ALL_MODULES.items():
+        for module in ALL_MODULES.values():
             for key, template in module.MESSAGES.items():
                 assert key in FORMAT_KWARGS, f"missing test kwargs for {key}"
                 # Raises KeyError/IndexError if a placeholder is wrong.

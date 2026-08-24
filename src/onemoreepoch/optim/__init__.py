@@ -7,4 +7,4 @@ from onemoreepoch.optim.optimizer import Optimizer
 from onemoreepoch.optim.rmsprop import RMSProp
 from onemoreepoch.optim.sgd import SGD
 
-__all__ = ["AdaGrad", "Adam", "AdamW", "Optimizer", "RMSProp", "SGD"]
+__all__ = ["SGD", "AdaGrad", "Adam", "AdamW", "Optimizer", "RMSProp"]

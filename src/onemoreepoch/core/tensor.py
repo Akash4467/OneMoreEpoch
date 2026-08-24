@@ -37,7 +37,7 @@ class Tensor:
         self.grad: Any = None
         # Graph pointers — written by Function.apply(), read by the engine.
         self.creator: Any = None
-        self.parents: tuple["Tensor", ...] = ()
+        self.parents: tuple[Tensor, ...] = ()
         self.context: Any = None
 
     # -- factories -------------------------------------------------------

@@ -9,7 +9,7 @@ clauses and tests keep working unchanged.
 
 from typing import Any
 
-from onemoreepoch.messages import get_message, get_meme_for_key
+from onemoreepoch.messages import get_meme_for_key, get_message
 
 
 class OneMoreEpochError(Exception):
@@ -68,8 +68,8 @@ class GradientWarning(UserWarning):
 __all__ = [
     "AutogradError",
     "BackendError",
-    "DataError",
     "DTypeError",
+    "DataError",
     "GradientWarning",
     "ModuleError",
     "OneMoreEpochError",

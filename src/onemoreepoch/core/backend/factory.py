@@ -8,7 +8,7 @@ building it, or even importing the module that would build it, during
 ``import onemoreepoch``.
 """
 
-from typing import Callable
+from collections.abc import Callable
 
 from onemoreepoch.core.backend.base import Backend
 

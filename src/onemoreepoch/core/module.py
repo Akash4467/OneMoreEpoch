@@ -5,7 +5,8 @@ train/eval mode switching, and state serialization. Concrete layers
 subclass this and implement ``forward()``.
 """
 
-from typing import Any, Iterator
+from collections.abc import Iterator
+from typing import Any
 
 from onemoreepoch.core.parameter import Parameter
 from onemoreepoch.core.tensor import Tensor

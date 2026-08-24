@@ -1,7 +1,7 @@
 """Simple blocklist + length + category-presence moderation."""
 
-from tools.meme_updater.moderation.base import MemeModerator, ModerationResult
 from tools.meme_updater.models import CandidateMeme
+from tools.meme_updater.moderation.base import MemeModerator, ModerationResult
 
 # Not exhaustive — a real deployment would want something more robust.
 _BLOCKLIST = ("http://", "https://", "<script")

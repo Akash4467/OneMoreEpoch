@@ -60,8 +60,9 @@ def load_active_catalog(updated_path: Path | None = None) -> MemeCatalog | None:
     for candidate in (updated_path, DEFAULT_CATALOG_PATH):
         if candidate is None:
             continue
+        # Falls through to the next candidate - a corrupt catalog must never raise.
         try:
             return load_catalog(candidate)
-        except Exception:
+        except Exception:  # noqa: BLE001, S112
             continue
     return None
