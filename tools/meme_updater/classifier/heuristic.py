@@ -1,13 +1,8 @@
-"""Keyword -> category classifier. Trusts the collector-supplied mode
-and, when the collector already assigned categories (a seed file can do
-this for lines too oblique for keyword matching), trusts those too."""
-
 from dataclasses import replace
 
 from tools.meme_updater.classifier.base import MemeClassifier
 from tools.meme_updater.models import CandidateMeme
 
-# Substring (lowercase) -> category. A candidate can match several.
 _KEYWORD_CATEGORIES: dict[str, str] = {
     "checkpoint": "checkpoint_saved",
     "gradient": "gradient_error",
@@ -28,9 +23,9 @@ _KEYWORD_CATEGORIES: dict[str, str] = {
 }
 
 
+# Keyword -> category classifier; trusts collector-supplied mode/categories when present
 class HeuristicClassifier(MemeClassifier):
-    """Scans the text for known keywords and collects their categories."""
-
+    # Scans the text for known keywords and collects their categories
     def classify(self, candidate: CandidateMeme) -> CandidateMeme:
         if candidate.categories:
             return candidate

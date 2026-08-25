@@ -1,11 +1,3 @@
-"""Batch normalization over a (N, C) input.
-
-Scoped to 2-D input (the shape that follows a Linear layer) rather than
-also generalizing to (N, C, H, W) conv outputs — the extra broadcasting
-bookkeeping that would need isn't exercised by anything in this pass,
-and an untested generalization is worse than an honest, narrower layer.
-"""
-
 from onemoreepoch.core.backend.registry import get_backend
 from onemoreepoch.core.module import Module
 from onemoreepoch.core.parameter import Parameter
@@ -14,9 +6,9 @@ from onemoreepoch.exceptions import ModuleError
 from onemoreepoch.nn.init import ones_, zeros_
 
 
+# Normalizes a (N, C) input to zero mean / unit variance per feature across the batch
 class BatchNorm(Module):
-    """Normalizes each feature to zero mean / unit variance across the batch."""
-
+    # Validates eps/momentum and builds gamma/beta parameters plus running-stat buffers
     def __init__(
         self, num_features: int, *, eps: float = 1e-5, momentum: float = 0.1
     ) -> None:
@@ -43,12 +35,11 @@ class BatchNorm(Module):
 
         self.gamma = ones_(Parameter(Tensor.zeros(num_features).data))
         self.beta = zeros_(Parameter(Tensor.zeros(num_features).data))
-        # Running estimates are plain backend arrays, not Parameters —
-        # they're tracked, not trained.
         backend = get_backend()
         self.running_mean = backend.zeros((num_features,))
         self.running_var = backend.ones((num_features,))
 
+    # Normalizes x using batch statistics (training) or running statistics (eval)
     def forward(self, x: Tensor) -> Tensor:
         backend = get_backend()
         if self.training:
@@ -74,5 +65,6 @@ class BatchNorm(Module):
         normalized = (x - mean) / ((var + self.eps) ** 0.5)
         return normalized * self.gamma + self.beta
 
+    # Returns a debug string representation
     def __repr__(self) -> str:
         return f"BatchNorm(num_features={self.num_features}, eps={self.eps})"

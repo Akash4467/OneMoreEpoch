@@ -1,11 +1,3 @@
-"""Orchestrates collector -> classifier -> moderator -> ranker -> publisher.
-
-Incremental, not destructive: the existing catalog at ``output_path``
-(if any) is loaded and merged with newly approved candidates before
-publishing, so running the updater never discards previously curated
-content — only adds to it and drops near-duplicates.
-"""
-
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -19,8 +11,8 @@ from tools.meme_updater.publisher.local_file import LocalFilePublisher
 from tools.meme_updater.ranker.heuristic import HeuristicRanker
 
 
+# Runs collector -> classifier -> moderator -> ranker -> publisher and returns the output path
 def run(output_path: Path) -> Path:
-    """Run the full pipeline once and publish the resulting catalog."""
     now = datetime.now(UTC)
 
     existing = load_active_catalog(output_path if output_path.exists() else None)

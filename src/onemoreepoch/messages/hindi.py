@@ -1,12 +1,4 @@
-"""Hindi-flavored training messages — the JOURNEY.md fun mode.
-
-Text templates only (ADR-010): this module never raises exceptions or
-performs computation. Placeholders are filled via ``str.format`` by
-``messages.get_message()``.
-"""
-
 MESSAGES: dict[str, str] = {
-    # JOURNEY.md sample — kept verbatim where given.
     "shape_mismatch_matmul": (
         "🚨 Arre bhai!\n"
         "Shape mismatch.\n"
@@ -30,7 +22,6 @@ MESSAGES: dict[str, str] = {
         "Aise nahi hota bhai.\n"
         "Pehle .sum() ya .mean() se scalar banao, ya seed gradient do."
     ),
-    # JOURNEY.md sample — kept verbatim where given.
     "gradient_explosion": (
         "⚠️ Gradient Explosion Detected!\n"
         "Bhai throttle maar... learning rate bahut zyada hai.\n"
@@ -92,7 +83,6 @@ MESSAGES: dict[str, str] = {
 }
 
 EPOCH_BANTER: list[str] = [
-    # JOURNEY.md sample — kept verbatim where given.
     'Model: "Aaj kuch toofani karte hain."',
     'Model: "Gradient flow full speed pe hai."',
     'Model: "Loss neeche, confidence upar."',

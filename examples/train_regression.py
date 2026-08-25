@@ -1,17 +1,3 @@
-"""End-to-end training example: learn y = 2x + 1 with a small MLP.
-
-Run:
-    python examples/train_regression.py
-
-Fun modes (JOURNEY.md — opt-in, per ADR-010):
-    ONEMOREEPOCH_MESSAGES=hindi python examples/train_regression.py
-    ONEMOREEPOCH_MESSAGES=roast python examples/train_regression.py
-
-or programmatically:
-    from onemoreepoch import config
-    config.set_message_mode("hindi")
-"""
-
 import numpy as np
 
 from onemoreepoch import Tensor
@@ -20,9 +6,9 @@ from onemoreepoch.optim import SGD
 from onemoreepoch.utils import TrainingLogger
 
 
+# Trains a small MLP to learn y = 2x + 1 and prints progress plus a final prediction
 def main() -> None:
     np.random.seed(0)
-    # Toy dataset: y = 2x + 1 with a little noise.
     x_data = np.random.randn(128, 1)
     y_data = 2 * x_data + 1 + 0.01 * np.random.randn(128, 1)
     x, y = Tensor(x_data), Tensor(y_data)

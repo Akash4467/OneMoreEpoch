@@ -1,10 +1,3 @@
-"""Numeric parity between RustBackend and NumPyBackend.
-
-Skipped entirely if the Rust extension isn't built — Track 1 (the
-Python restructure) must never depend on Track 2 (the Rust core)
-having succeeded in a given environment.
-"""
-
 import numpy as np
 import pytest
 
@@ -16,18 +9,22 @@ rust_backend_module = pytest.importorskip(
 RustBackend = rust_backend_module.RustBackend
 
 
+# Converts a numpy array or RustArray into a numpy array
 def _to_numpy(raw) -> np.ndarray:
     if isinstance(raw, np.ndarray):
         return raw
     return np.array(raw.tolist()).reshape(raw.shape)
 
 
+# Returns a fresh (NumPyBackend, RustBackend) pair for each test
 @pytest.fixture
 def backends():
     return NumPyBackend(), RustBackend()
 
 
+# Tests array-creation parity between backends
 class TestArrayCreation:
+    # Checks zeros/ones/full match between backends
     def test_zeros_ones_full(self, backends):
         npb, rb = backends
         np.testing.assert_allclose(
@@ -40,6 +37,7 @@ class TestArrayCreation:
             _to_numpy(npb.full((2, 2), 7.0)), _to_numpy(rb.full((2, 2), 7.0))
         )
 
+    # Checks array() from a nested list matches between backends
     def test_array_from_nested_list(self, backends):
         npb, rb = backends
         data = [[1.0, 2.0], [3.0, 4.0]]
@@ -48,12 +46,15 @@ class TestArrayCreation:
         )
 
 
+# Tests arithmetic parity between backends
 class TestArithmeticParity:
+    # Returns two random arrays for arithmetic tests
     @pytest.fixture
     def arrays(self):
         rng = np.random.default_rng(0)
         return rng.standard_normal((3, 4)), rng.standard_normal((3, 4))
 
+    # Checks binary elementwise ops match between backends
     def test_binary_ops(self, backends, arrays):
         npb, rb = backends
         a_np, b_np = arrays
@@ -62,6 +63,7 @@ class TestArithmeticParity:
             rust_result = _to_numpy(getattr(rb, op)(rb.array(a_np), rb.array(b_np)))
             np.testing.assert_allclose(np_result, rust_result, atol=1e-10, err_msg=op)
 
+    # Checks binary ops with a scalar operand on either side match between backends
     def test_binary_ops_with_scalar(self, backends, arrays):
         npb, rb = backends
         a_np, _ = arrays
@@ -69,15 +71,15 @@ class TestArithmeticParity:
             np_result = _to_numpy(getattr(npb, op)(npb.array(a_np), 2.5))
             rust_result = _to_numpy(getattr(rb, op)(rb.array(a_np), 2.5))
             np.testing.assert_allclose(np_result, rust_result, atol=1e-10, err_msg=op)
-            # and scalar-on-the-left, via RustArray's __r*__ dunders
             np_result2 = _to_numpy(getattr(npb, op)(2.5, npb.array(a_np)))
             rust_result2 = _to_numpy(getattr(rb, op)(2.5, rb.array(a_np)))
             np.testing.assert_allclose(np_result2, rust_result2, atol=1e-10, err_msg=op)
 
+    # Checks unary elementwise ops match between backends
     def test_unary_ops(self, backends, arrays):
         npb, rb = backends
         a_np, _ = arrays
-        positive = np.abs(a_np) + 0.1  # keep log/sqrt in-domain
+        positive = np.abs(a_np) + 0.1
         for op, arr in [
             ("negative", a_np),
             ("absolute", a_np),
@@ -90,6 +92,7 @@ class TestArithmeticParity:
             rust_result = _to_numpy(getattr(rb, op)(rb.array(arr)))
             np.testing.assert_allclose(np_result, rust_result, atol=1e-8, err_msg=op)
 
+    # Checks power matches between backends
     def test_power(self, backends, arrays):
         npb, rb = backends
         a_np, _ = arrays
@@ -99,7 +102,9 @@ class TestArithmeticParity:
         np.testing.assert_allclose(np_result, rust_result, atol=1e-8)
 
 
+# Tests matmul parity between backends
 class TestMatMulParity:
+    # Checks 2D @ 2D matmul matches between backends
     def test_2d_2d(self, backends):
         npb, rb = backends
         rng = np.random.default_rng(1)
@@ -110,6 +115,7 @@ class TestMatMulParity:
             atol=1e-8,
         )
 
+    # Checks 2D @ 1D matmul matches between backends
     def test_2d_1d(self, backends):
         npb, rb = backends
         rng = np.random.default_rng(2)
@@ -121,11 +127,14 @@ class TestMatMulParity:
         )
 
 
+# Tests reduction parity between backends across axis/keepdims combinations
 class TestReductionParity:
+    # Returns a random 3D array for reduction tests
     @pytest.fixture
     def a(self):
         return np.random.default_rng(3).standard_normal((3, 4, 2))
 
+    # Checks sum/mean/max match between backends for every axis/keepdims combination
     @pytest.mark.parametrize("op", ["sum", "mean", "max"])
     @pytest.mark.parametrize("axis", [None, 0, 1, (0, 2), (1, 2)])
     @pytest.mark.parametrize("keepdims", [False, True])
@@ -140,7 +149,9 @@ class TestReductionParity:
         np.testing.assert_allclose(np_result, rust_result, atol=1e-8)
 
 
+# Tests shape-manipulation parity between backends
 class TestShapeParity:
+    # Checks reshape matches between backends
     def test_reshape(self, backends):
         npb, rb = backends
         a = np.arange(24.0)
@@ -149,6 +160,7 @@ class TestShapeParity:
             _to_numpy(rb.reshape(rb.array(a), (2, 3, 4))),
         )
 
+    # Checks transpose (default and explicit axes) matches between backends
     def test_transpose_default_and_explicit_axes(self, backends):
         npb, rb = backends
         a = np.arange(24.0).reshape(2, 3, 4)
@@ -160,6 +172,7 @@ class TestShapeParity:
             _to_numpy(rb.transpose(rb.array(a), (1, 0, 2))),
         )
 
+    # Checks broadcast_to matches between backends
     def test_broadcast_to(self, backends):
         npb, rb = backends
         a = np.array([1.0, 2.0, 3.0])
@@ -169,14 +182,13 @@ class TestShapeParity:
         )
 
 
+# Tests that Conv2D's NumPy-delegated im2col/col2im round-trip correctly under RustBackend
 class TestConv2DUnderRustBackend:
-    """Conv2D's im2col/col2im delegate to NumPy under the hood (see
-    rust_backend.py) — verify that delegation actually round-trips
-    correctly end-to-end, not just that it runs."""
-
+    # Checks Conv2D forward/backward under the Rust backend matches the NumPy backend
     def test_forward_backward_matches_numpy_backend(self):
         import onemoreepoch.core.backend.registry as registry_mod
 
+        # Runs a fixed Conv2D forward/backward pass under the given backend name
         def run(backend_name):
             original = registry_mod._DEFAULT_BACKEND
             registry_mod._DEFAULT_BACKEND = backend_name
@@ -207,9 +219,9 @@ class TestConv2DUnderRustBackend:
         np.testing.assert_allclose(numpy_grad, rust_grad, atol=1e-6)
 
 
+# Tests a full fixed-weight training pipeline matches across backends
 class TestFullPipelineParity:
-    """Same fixed-value model, run through Tensor/nn/optim under each backend."""
-
+    # Runs a fixed Linear-ReLU-Linear model's forward/backward/step under the given backend
     def _run_pipeline(self, backend_name: str) -> tuple:
         import onemoreepoch.core.backend.registry as registry_mod
 
@@ -244,6 +256,7 @@ class TestFullPipelineParity:
         finally:
             registry_mod._DEFAULT_BACKEND = original
 
+    # Checks loss, gradients, and updated weights all match between backends
     def test_linear_relu_linear_matches_across_backends(self):
         numpy_loss, numpy_grads, numpy_updated = self._run_pipeline("numpy")
         rust_loss, rust_grads, rust_updated = self._run_pipeline("rust")

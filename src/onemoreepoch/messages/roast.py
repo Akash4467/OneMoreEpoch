@@ -1,10 +1,3 @@
-"""Roast-style training messages — savage but safe-for-work.
-
-Text templates only (ADR-010): this module never raises exceptions or
-performs computation. Placeholders are filled via ``str.format`` by
-``messages.get_message()``.
-"""
-
 MESSAGES: dict[str, str] = {
     "shape_mismatch_matmul": (
         "🔥 You tried to matmul {left} with {right}.\n"

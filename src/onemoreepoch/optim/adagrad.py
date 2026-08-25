@@ -1,14 +1,12 @@
-"""AdaGrad: divide the gradient by the square root of its running sum of squares."""
-
 from onemoreepoch.core.backend.registry import get_backend
 from onemoreepoch.core.parameter import Parameter
 from onemoreepoch.exceptions import OptimizerError
 from onemoreepoch.optim.optimizer import Optimizer
 
 
+# Divides the gradient by the square root of its running sum of squares
 class AdaGrad(Optimizer):
-    """G_t += g^2 (accumulated, never decayed); param -= lr * g / (sqrt(G_t) + eps)."""
-
+    # Validates eps and initializes the accumulated-squared-gradient state
     def __init__(
         self, parameters: list[Parameter], lr: float = 0.01, eps: float = 1e-10
     ) -> None:
@@ -24,6 +22,7 @@ class AdaGrad(Optimizer):
         self.eps = eps
         self._sum_sq: dict[int, object] = {}
 
+    # Updates the parameter using the accumulated sum of squared gradients
     def _update_parameter(self, param: Parameter) -> None:
         key = id(param)
         grad = param.grad

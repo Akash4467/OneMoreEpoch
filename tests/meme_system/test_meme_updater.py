@@ -1,5 +1,3 @@
-"""Tests for tools/meme_updater's local content pipeline."""
-
 import json
 
 from tools.meme_updater.classifier.heuristic import HeuristicClassifier
@@ -10,16 +8,19 @@ from tools.meme_updater.pipeline import run
 from tools.meme_updater.ranker.heuristic import HeuristicRanker
 
 
+# Tests LocalSeedCollector
 class TestLocalSeedCollector:
+    # Checks every seed file is collected and modes are all represented
     def test_collects_every_seed_file(self):
         candidates = list(LocalSeedCollector().collect())
         modes = {c.mode for c in candidates}
         assert modes == {"classic", "hindi", "roast"}
-        # 3 generic seed files x 3 entries + hindi_trending_seeds.json's 61
         assert len(candidates) == 9 + 61
 
 
+# Tests HeuristicClassifier
 class TestHeuristicClassifier:
+    # Checks keyword matches assign the correct categories
     def test_assigns_categories_from_keywords(self):
         classifier = HeuristicClassifier()
         candidate = CandidateMeme(
@@ -29,6 +30,7 @@ class TestHeuristicClassifier:
         assert "checkpoint_saved" in classified.categories
         assert "gradient_error" in classified.categories
 
+    # Checks pre-assigned categories are trusted and not overwritten
     def test_trusts_collector_supplied_categories(self):
         classifier = HeuristicClassifier()
         candidate = CandidateMeme(
@@ -39,6 +41,7 @@ class TestHeuristicClassifier:
         classified = classifier.classify(candidate)
         assert classified.categories == ("overfitting",)
 
+    # Checks text with no keyword matches yields empty categories
     def test_no_keyword_match_yields_empty_categories(self):
         classifier = HeuristicClassifier()
         classified = classifier.classify(
@@ -47,11 +50,14 @@ class TestHeuristicClassifier:
         assert classified.categories == ()
 
 
+# Tests RuleBasedModerator
 class TestRuleBasedModerator:
+    # Checks an uncategorized candidate is rejected
     def test_rejects_uncategorized(self):
         result = RuleBasedModerator().moderate(CandidateMeme(text="hi", mode="classic"))
         assert not result.approved
 
+    # Checks a candidate containing a URL is rejected
     def test_rejects_urls(self):
         candidate = CandidateMeme(
             text="checkpoint at http://example.com",
@@ -60,6 +66,7 @@ class TestRuleBasedModerator:
         )
         assert not RuleBasedModerator().moderate(candidate).approved
 
+    # Checks clean, categorized text is approved
     def test_approves_clean_categorized_text(self):
         candidate = CandidateMeme(
             text="checkpoint saved", mode="classic", categories=("checkpoint_saved",)
@@ -67,7 +74,9 @@ class TestRuleBasedModerator:
         assert RuleBasedModerator().moderate(candidate).approved
 
 
+# Tests HeuristicRanker
 class TestHeuristicRanker:
+    # Checks near-duplicate text in the same mode is deduplicated
     def test_drops_near_duplicates_within_same_mode(self):
         candidates = [
             CandidateMeme(
@@ -84,6 +93,7 @@ class TestHeuristicRanker:
         ranked = HeuristicRanker().rank(candidates)
         assert len(ranked) == 1
 
+    # Checks identical text in different modes is kept, not deduplicated
     def test_keeps_similar_text_across_different_modes(self):
         candidates = [
             CandidateMeme(
@@ -101,7 +111,9 @@ class TestHeuristicRanker:
         assert len(ranked) == 2
 
 
+# Tests the full meme_updater pipeline
 class TestPipeline:
+    # Checks the pipeline publishes a valid, non-trivial catalog
     def test_publishes_a_valid_catalog(self, tmp_path):
         output = tmp_path / "catalog.json"
         published = run(output)
@@ -110,6 +122,7 @@ class TestPipeline:
         assert data["schema_version"] == 1
         assert len(data["memes"]) >= 9
 
+    # Checks running the pipeline twice doesn't duplicate entries
     def test_is_idempotent(self, tmp_path):
         output = tmp_path / "catalog.json"
         run(output)
@@ -118,6 +131,7 @@ class TestPipeline:
         second_count = len(json.loads(output.read_text(encoding="utf-8"))["memes"])
         assert first_count == second_count
 
+    # Checks running the pipeline preserves hand-written entries already in the catalog
     def test_merges_with_existing_catalog_without_losing_entries(self, tmp_path):
         output = tmp_path / "catalog.json"
         existing = {

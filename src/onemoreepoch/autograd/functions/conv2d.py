@@ -1,11 +1,3 @@
-"""z = conv2d(x, weight) — im2col + a single 2-D matmul, no bias.
-
-Bias is deliberately not handled here; the ``nn.layers.Conv2D`` module
-adds it as a plain broadcasted ``Tensor`` addition after this Function,
-mirroring how ``Linear`` composes MatMul + Add instead of folding bias
-into one Function.
-"""
-
 from typing import Any
 
 from onemoreepoch.autograd.context import Context
@@ -13,9 +5,9 @@ from onemoreepoch.autograd.function import Function
 from onemoreepoch.core.backend.registry import get_backend
 
 
+# 2-D convolution via im2col + matmul, no bias: z = conv2d(x, weight)
 class Conv2DOp(Function):
-    """z = conv2d(x, weight), x: (N, C_in, H, W), weight: (C_out, C_in, KH, KW)"""
-
+    # Convolves x with weight using im2col + one matmul, saving intermediates for backward
     @staticmethod
     def forward(
         ctx: Context,
@@ -34,12 +26,12 @@ class Conv2DOp(Function):
         w_out = (w + 2 * pw - kw) // sw + 1
         k = c_in * kh * kw
 
-        cols = backend.im2col(x, (kh, kw), (sh, sw), (ph, pw))  # (N, K, HW_out)
+        cols = backend.im2col(x, (kh, kw), (sh, sw), (ph, pw))
         weight_2d = backend.reshape(weight, (c_out, k))
         cols_2d = backend.reshape(
             backend.transpose(cols, (1, 0, 2)), (k, n * h_out * w_out)
         )
-        out_2d = backend.matmul(weight_2d, cols_2d)  # (C_out, N*HW_out)
+        out_2d = backend.matmul(weight_2d, cols_2d)
         out = backend.reshape(
             backend.transpose(
                 backend.reshape(out_2d, (c_out, n, h_out * w_out)), (1, 0, 2)
@@ -61,6 +53,7 @@ class Conv2DOp(Function):
         )
         return out
 
+    # Computes gradients with respect to x and weight via matmul + col2im
     @staticmethod
     def backward(ctx: Context, grad: Any) -> tuple[Any, ...]:
         backend = get_backend()
@@ -75,15 +68,11 @@ class Conv2DOp(Function):
             ),
             (c_out, n * h_out * w_out),
         )
-        grad_weight_2d = backend.matmul(
-            grad_2d, backend.transpose(cols_2d)
-        )  # (C_out, K)
-        grad_cols_2d = backend.matmul(
-            backend.transpose(weight_2d), grad_2d
-        )  # (K, N*HW_out)
+        grad_weight_2d = backend.matmul(grad_2d, backend.transpose(cols_2d))
+        grad_cols_2d = backend.matmul(backend.transpose(weight_2d), grad_2d)
         grad_cols = backend.transpose(
             backend.reshape(grad_cols_2d, (k, n, h_out * w_out)), (1, 0, 2)
-        )  # (N, K, HW_out)
+        )
 
         grad_x = backend.col2im(
             grad_cols, e["x_shape"], (kh, kw), e["stride"], e["padding"]

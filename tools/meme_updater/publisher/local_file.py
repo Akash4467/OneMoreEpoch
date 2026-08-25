@@ -1,10 +1,3 @@
-"""Writes the catalog to a local JSON file, atomically and validated.
-
-Reuses ``messages.memes.catalog.load_catalog`` — the runtime's own
-validator — as the single source of truth for "valid", instead of
-duplicating validation rules here.
-"""
-
 import dataclasses
 import json
 import os
@@ -15,10 +8,13 @@ from onemoreepoch.messages.memes.models import MemeCatalog
 from tools.meme_updater.publisher.base import MemePublisher
 
 
+# Writes the catalog to a local JSON file, atomically and validated
 class LocalFilePublisher(MemePublisher):
+    # Stores the destination path
     def __init__(self, output_path: Path) -> None:
         self.output_path = Path(output_path)
 
+    # Writes catalog to a temp file, validates it, then atomically swaps it into place
     def publish(self, catalog: MemeCatalog) -> Path:
         payload = {
             "schema_version": catalog.schema_version,
@@ -30,8 +26,6 @@ class LocalFilePublisher(MemePublisher):
         tmp_path.write_text(
             json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8"
         )
-        load_catalog(
-            tmp_path
-        )  # round-trip through the real validator before swapping in
+        load_catalog(tmp_path)
         os.replace(tmp_path, self.output_path)
         return self.output_path

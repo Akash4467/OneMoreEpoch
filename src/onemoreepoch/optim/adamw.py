@@ -1,5 +1,3 @@
-"""AdamW: Adam with decoupled weight decay."""
-
 from onemoreepoch.core.backend.registry import get_backend
 from onemoreepoch.core.parameter import Parameter
 from onemoreepoch.exceptions import OptimizerError
@@ -7,9 +5,9 @@ from onemoreepoch.optim.adam import _check_range
 from onemoreepoch.optim.optimizer import Optimizer
 
 
+# Adam with decoupled weight decay applied directly to the parameter
 class AdamW(Optimizer):
-    """Adam, but weight decay shrinks the parameter directly (not via the gradient)."""
-
+    # Validates betas/eps/weight_decay and initializes moment state
     def __init__(
         self,
         parameters: list[Parameter],
@@ -44,6 +42,7 @@ class AdamW(Optimizer):
         self._v: dict[int, object] = {}
         self._t: dict[int, int] = {}
 
+    # Applies decoupled weight decay, then a bias-corrected Adam moment update
     def _update_parameter(self, param: Parameter) -> None:
         key = id(param)
         if self.weight_decay > 0.0:

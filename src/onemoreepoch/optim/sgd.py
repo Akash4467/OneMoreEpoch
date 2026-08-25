@@ -1,16 +1,11 @@
-"""Stochastic gradient descent, with optional momentum."""
-
 from onemoreepoch.core.parameter import Parameter
 from onemoreepoch.exceptions import OptimizerError
 from onemoreepoch.optim.optimizer import Optimizer
 
 
+# Stochastic gradient descent with optional momentum
 class SGD(Optimizer):
-    """v = momentum * v + grad;  param -= lr * v
-
-    With ``momentum=0`` (the default) this is plain gradient descent.
-    """
-
+    # Validates momentum and initializes velocity state
     def __init__(
         self, parameters: list[Parameter], lr: float = 0.01, momentum: float = 0.0
     ) -> None:
@@ -26,6 +21,7 @@ class SGD(Optimizer):
         self.momentum = momentum
         self._velocity: dict[int, object] = {}
 
+    # Updates the parameter using momentum-accumulated gradient descent
     def _update_parameter(self, param: Parameter) -> None:
         update = param.grad
         if self.momentum > 0.0:

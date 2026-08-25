@@ -1,5 +1,3 @@
-"""Autograd Function subclasses — one file per differentiable operation."""
-
 from onemoreepoch.autograd.functions.add import Add
 from onemoreepoch.autograd.functions.conv2d import Conv2DOp
 from onemoreepoch.autograd.functions.divide import Div

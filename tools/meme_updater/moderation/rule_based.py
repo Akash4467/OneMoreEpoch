@@ -1,14 +1,13 @@
-"""Simple blocklist + length + category-presence moderation."""
-
 from tools.meme_updater.models import CandidateMeme
 from tools.meme_updater.moderation.base import MemeModerator, ModerationResult
 
-# Not exhaustive — a real deployment would want something more robust.
 _BLOCKLIST = ("http://", "https://", "<script")
 _MAX_LENGTH = 200
 
 
+# Rejects candidates with no category, text over the length limit, or blocklisted content
 class RuleBasedModerator(MemeModerator):
+    # Applies the blocklist/length/category checks and returns the result
     def moderate(self, candidate: CandidateMeme) -> ModerationResult:
         if not candidate.categories:
             return ModerationResult(False, "no category assigned")

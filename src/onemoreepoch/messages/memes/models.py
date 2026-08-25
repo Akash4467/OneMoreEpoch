@@ -1,9 +1,3 @@
-"""Meme/MemeCatalog: the schema shared by the runtime and tools/meme_updater/.
-
-``tools/meme_updater`` imports from here; this module must never import
-back from ``tools`` — the dependency is one-way.
-"""
-
 from dataclasses import dataclass
 
 CATEGORIES = frozenset(
@@ -29,10 +23,9 @@ CATEGORIES = frozenset(
 MODES = frozenset({"classic", "hindi", "roast"})
 
 
+# One catalog entry: a short piece of text tagged by mode and category
 @dataclass(frozen=True)
 class Meme:
-    """One catalog entry: a short piece of text tagged by mode and category."""
-
     id: str
     text: str
     mode: str
@@ -42,10 +35,9 @@ class Meme:
     created_at: str = ""
 
 
+# A versioned collection of memes
 @dataclass(frozen=True)
 class MemeCatalog:
-    """A versioned collection of memes."""
-
     schema_version: int
     catalog_version: str
     generated_at: str

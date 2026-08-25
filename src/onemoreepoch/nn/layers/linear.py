@@ -1,18 +1,12 @@
-"""Linear (fully connected) layer."""
-
 from onemoreepoch.core.module import Module
 from onemoreepoch.core.parameter import Parameter
 from onemoreepoch.core.tensor import Tensor
 from onemoreepoch.nn.init import kaiming_uniform_
 
 
+# Fully connected layer: y = x @ W + b
 class Linear(Module):
-    """Applies y = x @ W + b to the incoming data.
-
-    Weights use Kaiming-uniform-style scaling (sqrt(1/in_features)),
-    matching PyTorch's default Linear initialization.
-    """
-
+    # Builds weight/bias parameters with Kaiming-uniform initialization
     def __init__(
         self, in_features: int, out_features: int, *, bias: bool = True
     ) -> None:
@@ -31,12 +25,14 @@ class Linear(Module):
         else:
             self.bias = None
 
+    # Computes x @ weight (+ bias)
     def forward(self, x: Tensor) -> Tensor:
         out = x @ self.weight
         if self.bias is not None:
             out = out + self.bias
         return out
 
+    # Returns a debug string representation
     def __repr__(self) -> str:
         return (
             f"Linear(in_features={self.in_features}, "

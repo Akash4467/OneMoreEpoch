@@ -1,5 +1,3 @@
-"""2-D convolution layer (im2col + matmul, correctness over speed)."""
-
 from onemoreepoch.autograd.functions import Conv2DOp
 from onemoreepoch.core.module import Module
 from onemoreepoch.core.parameter import Parameter
@@ -7,13 +5,14 @@ from onemoreepoch.core.tensor import Tensor
 from onemoreepoch.nn.init import kaiming_uniform_
 
 
+# Normalizes an int or (int, int) into a (int, int) pair
 def _pair(value: int | tuple[int, int]) -> tuple[int, int]:
     return (value, value) if isinstance(value, int) else tuple(value)
 
 
+# 2-D convolution layer over a (N, C_in, H, W) input
 class Conv2D(Module):
-    """Applies a 2-D convolution over a (N, C_in, H, W) input."""
-
+    # Builds weight/bias parameters with Kaiming-uniform initialization
     def __init__(
         self,
         in_channels: int,
@@ -44,12 +43,14 @@ class Conv2D(Module):
         else:
             self.bias = None
 
+    # Convolves x with the layer's weight (+ bias)
     def forward(self, x: Tensor) -> Tensor:
         out = Conv2DOp.apply(x, self.weight, stride=self.stride, padding=self.padding)
         if self.bias is not None:
             out = out + self.bias.reshape(1, self.out_channels, 1, 1)
         return out
 
+    # Returns a debug string representation
     def __repr__(self) -> str:
         return (
             f"Conv2D(in_channels={self.in_channels}, "

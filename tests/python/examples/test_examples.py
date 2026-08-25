@@ -1,15 +1,9 @@
-"""Smoke tests: examples must run end-to-end without crashing.
-
-Runs each example's main() in-process (fast, no subprocess) and checks
-the key outcomes: training converges, and the debug showcase prints
-every scenario in every mode without raising.
-"""
-
 import pytest
 
 from onemoreepoch import config
 
 
+# Resets message mode and debug checks to defaults after each test
 @pytest.fixture(autouse=True)
 def reset_mode():
     yield
@@ -17,6 +11,7 @@ def reset_mode():
     config.set_debug_checks(False)
 
 
+# Checks the regression example runs end to end and converges
 def test_train_regression_runs_and_converges(capsys):
     from examples import train_regression
 
@@ -26,19 +21,16 @@ def test_train_regression_runs_and_converges(capsys):
     assert "model(3.0)" in out
 
 
+# Checks the debug showcase runs every scenario in every message mode without raising
 def test_debug_showcase_covers_all_modes(capsys):
     from examples import debug_showcase
 
     debug_showcase.main()
     out = capsys.readouterr().out
-    # Every mode section appears for the error scenarios.
     for mode in config.MESSAGE_MODES:
         assert f"--- {mode} ---" in out
-    # Signature lines from each personality made it to the output.
-    assert "Ye shaadi nahi ho sakti" in out  # hindi, JOURNEY.md verbatim
-    assert "Inner dimensions must agree" in out  # classic
-    assert "linear algebra" in out  # roast
-    # Gradient explosion warning fired in fun modes too.
+    assert "Ye shaadi nahi ho sakti" in out
+    assert "Inner dimensions must agree" in out
+    assert "linear algebra" in out
     assert "Bhai throttle maar" in out
-    # NaN loss detection from the TrainingLogger section.
     assert "diverged" in out

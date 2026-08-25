@@ -1,11 +1,3 @@
-"""DataLoader: batches and (optionally) shuffles samples from a Dataset.
-
-Collation happens on raw Python/NumPy data, before anything becomes a
-Tensor — this is the "Input/output interoperability... easy data
-manipulation" role the doc reserves for NumPy (§10), not a backend
-circumvention.
-"""
-
 from collections.abc import Iterator
 
 import numpy as np
@@ -14,9 +6,9 @@ from onemoreepoch.data.dataset import Dataset
 from onemoreepoch.exceptions import DataError
 
 
+# Iterates a Dataset in batches, optionally shuffled each pass
 class DataLoader:
-    """Iterates a Dataset in batches, optionally shuffled each pass."""
-
+    # Validates the dataset/batch_size and stores iteration settings
     def __init__(
         self,
         dataset: Dataset,
@@ -34,9 +26,11 @@ class DataLoader:
         self.shuffle = shuffle
         self._rng = np.random.default_rng(seed)
 
+    # Returns the number of batches
     def __len__(self) -> int:
         return (len(self.dataset) + self.batch_size - 1) // self.batch_size
 
+    # Yields batches of collated samples, in shuffled order if requested
     def __iter__(self) -> Iterator[tuple]:
         order = np.arange(len(self.dataset))
         if self.shuffle:
@@ -47,6 +41,7 @@ class DataLoader:
             yield _collate(samples)
 
 
+# Stacks a list of samples into a batch (tuple of arrays, or one array)
 def _collate(samples: list) -> tuple | np.ndarray:
     first = samples[0]
     if isinstance(first, tuple):

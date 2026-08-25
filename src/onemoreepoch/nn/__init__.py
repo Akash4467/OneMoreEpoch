@@ -1,5 +1,3 @@
-"""Neural network layers, activations, losses, and initialization."""
-
 from onemoreepoch.core.module import Module
 from onemoreepoch.core.parameter import Parameter
 from onemoreepoch.nn import init

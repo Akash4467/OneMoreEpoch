@@ -1,14 +1,12 @@
-"""Inverted dropout: zero elements with probability p, scale survivors."""
-
 from onemoreepoch.core.backend.registry import get_backend
 from onemoreepoch.core.module import Module
 from onemoreepoch.core.tensor import Tensor
 from onemoreepoch.exceptions import ModuleError
 
 
+# Inverted dropout: zeroes elements with probability p and scales survivors during training
 class Dropout(Module):
-    """Applies inverted dropout during training; a no-op during eval."""
-
+    # Validates p and stores it
     def __init__(self, p: float = 0.5) -> None:
         super().__init__()
         if not 0.0 <= p < 1.0:
@@ -21,15 +19,15 @@ class Dropout(Module):
             )
         self.p = p
 
+    # Applies a random keep-mask during training, or returns x unchanged during eval
     def forward(self, x: Tensor) -> Tensor:
         if not self.training or self.p == 0.0:
             return x
         backend = get_backend()
         keep_prob = 1.0 - self.p
-        # greater() yields a 0/1-valued array (same idiom ReLU's backward
-        # already relies on) — scale by 1/keep_prob so eval needs no rescale.
         mask = backend.divide(backend.greater(backend.rand(x.shape), self.p), keep_prob)
         return x * Tensor(mask)
 
+    # Returns a debug string representation
     def __repr__(self) -> str:
         return f"Dropout(p={self.p})"

@@ -1,5 +1,3 @@
-"""z = mean(a)"""
-
 from typing import Any
 
 from onemoreepoch.autograd.context import Context
@@ -8,9 +6,9 @@ from onemoreepoch.autograd.functions._reduction import expand_reduced_grad
 from onemoreepoch.core.backend.registry import get_backend
 
 
+# Reduction: z = mean(a) over an axis (or all axes)
 class Mean(Function):
-    """z = mean(a)"""
-
+    # Averages a over axis, saving shape/axis/keepdims for backward
     @staticmethod
     def forward(
         ctx: Context, a: Any, *, axis: Any = None, keepdims: bool = False
@@ -18,6 +16,7 @@ class Mean(Function):
         ctx.extras.update(shape=a.shape, axis=axis, keepdims=keepdims)
         return get_backend().mean(a, axis=axis, keepdims=keepdims)
 
+    # Divides grad by the reduced element count, then broadcasts back to the input's shape
     @staticmethod
     def backward(ctx: Context, grad: Any) -> tuple[Any, ...]:
         e = ctx.extras

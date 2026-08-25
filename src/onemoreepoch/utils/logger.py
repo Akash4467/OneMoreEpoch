@@ -1,11 +1,3 @@
-"""Training progress logging with optional personality.
-
-``TrainingLogger`` prints epoch summaries and, in fun modes, a rotating
-banter line (JOURNEY.md). It also watches loss health: NaN/Inf loss and
-sustained loss increases each get a mode-appropriate hint. Purely
-observational — it never touches tensors or gradients.
-"""
-
 import math
 
 from onemoreepoch import config
@@ -14,9 +6,9 @@ from onemoreepoch.messages import get_banter, get_message
 _INCREASE_STREAK_HINT = 3
 
 
+# Logs epoch progress and flags unhealthy loss curves
 class TrainingLogger:
-    """Logs epoch progress and flags unhealthy loss curves."""
-
+    # Initializes tracking state for best loss and increase streaks
     def __init__(self, *, log_every: int = 1) -> None:
         self.log_every = max(1, log_every)
         self._epochs_seen = 0
@@ -25,8 +17,8 @@ class TrainingLogger:
         self._increase_streak = 0
         self._increase_hint_shown = False
 
+    # Records one epoch's loss and prints a progress line
     def log_epoch(self, epoch: int, loss: float) -> None:
-        """Record one epoch's loss and print a progress line."""
         loss = float(loss)
         self._epochs_seen += 1
 
@@ -39,18 +31,17 @@ class TrainingLogger:
 
         if epoch % self.log_every == 0:
             line = f"Epoch {epoch:>4} | Loss: {loss:.6f}"
-            # Banter only in fun modes; classic stays clean (§21).
             if config.get_message_mode() != "classic":
                 line += f"  {get_banter(epoch)}"
             print(line)
 
+    # Prints the end-of-training summary
     def finish(self) -> None:
-        """Print the end-of-training summary."""
         best = self._best_loss if self._best_loss != math.inf else float("nan")
         print(get_message("training_complete", epochs=self._epochs_seen, best=best))
 
+    # Warns once if loss keeps climbing for several consecutive epochs
     def _track_increase(self, loss: float) -> None:
-        """Warn once if loss keeps climbing (learning rate likely too high)."""
         if self._prev_loss is not None and loss > self._prev_loss:
             self._increase_streak += 1
         else:

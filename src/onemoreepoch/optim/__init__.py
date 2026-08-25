@@ -1,5 +1,3 @@
-"""Optimization algorithms."""
-
 from onemoreepoch.optim.adagrad import AdaGrad
 from onemoreepoch.optim.adam import Adam
 from onemoreepoch.optim.adamw import AdamW

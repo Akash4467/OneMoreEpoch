@@ -1,10 +1,3 @@
-"""The backward engine: reverse topological graph traversal.
-
-Owns all graph-traversal logic (ADR-008). Walks ``creator``/``parents``
-pointers back from the root tensor, invoking each Function's backward
-and accumulating gradients into ``Tensor.grad``.
-"""
-
 import warnings
 from typing import TYPE_CHECKING, Any
 
@@ -17,17 +10,12 @@ from onemoreepoch.messages import get_message
 if TYPE_CHECKING:
     from onemoreepoch.core.tensor import Tensor
 
-# Thresholds for the opt-in gradient-health diagnostics.
 _EXPLOSION_THRESHOLD = 1e3
 _VANISHING_THRESHOLD = 1e-7
 
 
+# Computes gradients of root with respect to every reachable leaf via reverse-mode traversal
 def run_backward(root: "Tensor", grad: "Tensor | None" = None) -> None:
-    """Compute gradients of ``root`` w.r.t. every reachable leaf.
-
-    ``grad`` seeds the traversal; it defaults to ones (which requires
-    ``root`` to be a scalar, matching PyTorch semantics).
-    """
     if not root.requires_grad:
         raise AutogradError("backward_no_grad")
 
@@ -39,9 +27,7 @@ def run_backward(root: "Tensor", grad: "Tensor | None" = None) -> None:
     else:
         seed = grad.data if hasattr(grad, "data") else backend.array(grad)
 
-    # grad accumulation buffer keyed by tensor identity
     grads: dict[int, Any] = {id(root): seed}
-    # Warn at most once per backward call, per condition.
     health = {"explosion": False, "vanishing": False}
 
     for tensor in topological_order(root):
@@ -49,9 +35,6 @@ def run_backward(root: "Tensor", grad: "Tensor | None" = None) -> None:
         if upstream is None:
             continue
 
-        # Educational choice: every requires_grad tensor keeps its grad
-        # (PyTorch only keeps leaves by default) so users can inspect
-        # gradients anywhere in the graph.
         _accumulate_into(tensor, upstream, backend)
 
         if tensor.creator is None:
@@ -70,8 +53,8 @@ def run_backward(root: "Tensor", grad: "Tensor | None" = None) -> None:
                 grads[key] = parent_grad
 
 
+# Warns once per backward call on exploding or vanishing gradients
 def _check_gradient_health(grad: Any, backend: Any, health: dict[str, bool]) -> None:
-    """Warn (once per backward) on exploding or vanishing gradients."""
     peak = float(backend.max(backend.absolute(grad)))
     if not health["explosion"] and peak > _EXPLOSION_THRESHOLD:
         health["explosion"] = True
@@ -89,8 +72,8 @@ def _check_gradient_health(grad: Any, backend: Any, health: dict[str, bool]) -> 
         )
 
 
+# Adds grad into tensor.grad, initializing it if needed
 def _accumulate_into(tensor: "Tensor", grad: Any, backend: Any) -> None:
-    """Add ``grad`` into ``tensor.grad``, initializing it if needed."""
     if tensor.grad is None:
         tensor.grad = grad
     else:

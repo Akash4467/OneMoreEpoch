@@ -1,19 +1,8 @@
-"""Graph traversal: reverse topological ordering over GraphNode.parents.
-
-Split out of ``engine.py`` so the DAG-ordering logic (doc §30's DAG
-pattern) is independently testable and reusable without pulling in the
-gradient-accumulation/warning logic that lives in the engine.
-"""
-
 from onemoreepoch.autograd.node import GraphNode
 
 
+# Returns nodes in reverse topological order (root first) via iterative DFS
 def topological_order(root: GraphNode) -> list[GraphNode]:
-    """Return nodes in reverse topological order (root first).
-
-    Iterative DFS post-order over ``parents`` pointers, reversed —
-    guarantees every node is visited only after all its consumers.
-    """
     order: list[GraphNode] = []
     visited: set[int] = set()
     stack: list[tuple[GraphNode, bool]] = [(root, False)]

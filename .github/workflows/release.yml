@@ -27,9 +27,6 @@ jobs:
         with:
           target: x86_64
           manylinux: auto
-          # Explicit interpreter, not --find-interpreter: runners also ship
-          # newer Pythons (3.13/3.14) that PyO3 0.22 doesn't support yet,
-          # and --find-interpreter would try (and fail) to build for those too.
           args: --release --out dist -i 3.12
       - uses: actions/upload-artifact@v4
         with:
@@ -47,9 +44,6 @@ jobs:
         uses: PyO3/maturin-action@v1
         with:
           target: x64
-          # Explicit interpreter, not --find-interpreter: runners also ship
-          # newer Pythons (3.13/3.14) that PyO3 0.22 doesn't support yet,
-          # and --find-interpreter would try (and fail) to build for those too.
           args: --release --out dist -i 3.12
       - uses: actions/upload-artifact@v4
         with:
@@ -67,9 +61,6 @@ jobs:
         uses: PyO3/maturin-action@v1
         with:
           target: universal2-apple-darwin
-          # Explicit interpreter, not --find-interpreter: runners also ship
-          # newer Pythons (3.13/3.14) that PyO3 0.22 doesn't support yet,
-          # and --find-interpreter would try (and fail) to build for those too.
           args: --release --out dist -i 3.12
       - uses: actions/upload-artifact@v4
         with:
@@ -94,11 +85,9 @@ jobs:
     name: Publish
     runs-on: ubuntu-latest
     needs: [linux, windows, macos, sdist]
-    # Manual runs default to TestPyPI (safe to re-run); publishing a GitHub
-    # Release always goes to real PyPI.
     environment: ${{ (github.event_name == 'release' || inputs.target == 'pypi') && 'pypi' || 'testpypi' }}
     permissions:
-      id-token: write  # Trusted Publishing — no stored API token needed.
+      id-token: write
     steps:
       - uses: actions/download-artifact@v4
         with:

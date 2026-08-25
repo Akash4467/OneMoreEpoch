@@ -1,5 +1,3 @@
-"""Backend abstraction for array operations."""
-
 from onemoreepoch.core.backend.base import Backend
 from onemoreepoch.core.backend.factory import register_backend_factory
 from onemoreepoch.core.backend.numpy_backend import NumPyBackend

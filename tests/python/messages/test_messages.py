@@ -1,5 +1,3 @@
-"""Tests for the personality message system (config + messages)."""
-
 import importlib
 
 import pytest
@@ -9,7 +7,6 @@ from onemoreepoch.messages import classic, get_banter, get_message, hindi, roast
 
 ALL_MODULES = {"classic": classic, "hindi": hindi, "roast": roast}
 
-# Format kwargs that satisfy every template's placeholders.
 FORMAT_KWARGS = {
     "shape_mismatch_matmul": {"left": (64, 128), "right": (32, 10)},
     "broadcast_failure": {"op": "Add", "shapes": ((3, 2), (4, 5))},
@@ -48,36 +45,42 @@ FORMAT_KWARGS = {
 }
 
 
+# Resets message mode and debug checks after each test
 @pytest.fixture(autouse=True)
 def reset_mode():
-    """Keep mode changes from leaking across tests."""
     yield
     config.set_message_mode("classic")
     config.set_debug_checks(False)
 
 
+# Tests that all three personality catalogs stay consistent with each other
 class TestCatalogConsistency:
+    # Checks every mode defines exactly the same set of message keys
     def test_all_modes_define_same_keys(self):
         expected = set(classic.MESSAGES)
         for name, module in ALL_MODULES.items():
             assert set(module.MESSAGES) == expected, f"{name} keys differ"
 
+    # Checks every template formats cleanly with its expected kwargs
     def test_all_templates_format_cleanly(self):
         for module in ALL_MODULES.values():
             for key, template in module.MESSAGES.items():
                 assert key in FORMAT_KWARGS, f"missing test kwargs for {key}"
-                # Raises KeyError/IndexError if a placeholder is wrong.
                 assert template.format(**FORMAT_KWARGS[key])
 
+    # Checks every mode has at least one banter line
     def test_every_mode_has_banter(self):
         for name, module in ALL_MODULES.items():
             assert module.EPOCH_BANTER, f"{name} has no banter"
 
 
+# Tests message mode selection and environment-variable initialization
 class TestModeSelection:
+    # Checks classic is the default mode
     def test_default_mode_is_classic(self):
         assert config.get_message_mode() == "classic"
 
+    # Checks changing the mode changes resolved message text
     def test_set_mode_changes_messages(self):
         config.set_message_mode("hindi")
         msg = get_message("shape_mismatch_matmul", left=(2, 3), right=(4, 5))
@@ -89,17 +92,20 @@ class TestModeSelection:
             left=(2, 3), right=(4, 5)
         )
 
+    # Checks an invalid mode name is rejected
     def test_invalid_mode_rejected(self):
         with pytest.raises(ValueError):
             config.set_message_mode("shakespeare")
 
+    # Checks ONEMOREEPOCH_MESSAGES env var sets the initial mode
     def test_env_var_initialization(self, monkeypatch):
         monkeypatch.setenv("ONEMOREEPOCH_MESSAGES", "roast")
         importlib.reload(config)
         assert config.get_message_mode() == "roast"
         monkeypatch.delenv("ONEMOREEPOCH_MESSAGES")
-        importlib.reload(config)  # restore default for other tests
+        importlib.reload(config)
 
+    # Checks EDUCATIONAL_MODE=1 maps to hindi mode
     def test_educational_mode_env_maps_to_hindi(self, monkeypatch):
         monkeypatch.setenv("EDUCATIONAL_MODE", "1")
         importlib.reload(config)
@@ -108,7 +114,9 @@ class TestModeSelection:
         importlib.reload(config)
 
 
+# Tests epoch banter rotation
 class TestBanter:
+    # Checks banter rotates deterministically and wraps around
     def test_rotation_is_deterministic_and_wraps(self):
         config.set_message_mode("hindi")
         n = len(hindi.EPOCH_BANTER)

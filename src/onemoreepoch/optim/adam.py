@@ -1,11 +1,10 @@
-"""Adam: adaptive moment estimation."""
-
 from onemoreepoch.core.backend.registry import get_backend
 from onemoreepoch.core.parameter import Parameter
 from onemoreepoch.exceptions import OptimizerError
 from onemoreepoch.optim.optimizer import Optimizer
 
 
+# Raises OptimizerError if value is outside [low, high)
 def _check_range(
     optimizer: str, param: str, value: float, low: float, high: float
 ) -> None:
@@ -19,9 +18,9 @@ def _check_range(
         )
 
 
+# Adam optimizer: bias-corrected first/second moment estimates
 class Adam(Optimizer):
-    """m_t, v_t bias-corrected moment estimates; param -= lr * m_hat / (sqrt(v_hat) + eps)."""
-
+    # Validates betas/eps and initializes moment state
     def __init__(
         self,
         parameters: list[Parameter],
@@ -46,6 +45,7 @@ class Adam(Optimizer):
         self._v: dict[int, object] = {}
         self._t: dict[int, int] = {}
 
+    # Updates the parameter using bias-corrected Adam moment estimates
     def _update_parameter(self, param: Parameter) -> None:
         key = id(param)
         grad = param.grad
@@ -59,8 +59,6 @@ class Adam(Optimizer):
 
         m_hat = m / (1 - self.beta1**t)
         v_hat = v / (1 - self.beta2**t)
-        # sqrt has no arithmetic-operator form; the one deliberate
-        # backend call amid otherwise-raw `.data`/`.grad` arithmetic.
         param.data = param.data - self.lr * m_hat / (
             get_backend().sqrt(v_hat) + self.eps
         )

@@ -1,5 +1,3 @@
-"""RMSProp: divide the gradient by a running RMS of recent gradients."""
-
 from onemoreepoch.core.backend.registry import get_backend
 from onemoreepoch.core.parameter import Parameter
 from onemoreepoch.exceptions import OptimizerError
@@ -7,9 +5,9 @@ from onemoreepoch.optim.adam import _check_range
 from onemoreepoch.optim.optimizer import Optimizer
 
 
+# Divides the gradient by a running RMS of recent squared gradients
 class RMSProp(Optimizer):
-    """v_t = alpha*v + (1-alpha)*g^2; param -= lr * g / (sqrt(v_t) + eps)."""
-
+    # Validates alpha/momentum/eps and initializes running-average state
     def __init__(
         self,
         parameters: list[Parameter],
@@ -33,6 +31,7 @@ class RMSProp(Optimizer):
         self._v: dict[int, object] = {}
         self._velocity: dict[int, object] = {}
 
+    # Updates the parameter using an RMS-normalized gradient, with optional momentum
     def _update_parameter(self, param: Parameter) -> None:
         key = id(param)
         grad = param.grad

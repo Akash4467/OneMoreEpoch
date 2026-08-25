@@ -1,11 +1,3 @@
-"""Loads, validates, and falls back for the meme catalog.
-
-Any failure here (missing file, bad JSON, invalid schema) degrades to
-the packaged default catalog — a meme failure must never propagate
-(doc §26). ``load_catalog`` itself raises on problems; the fallback
-logic lives one level up in ``load_active_catalog``.
-"""
-
 import json
 from pathlib import Path
 from typing import Any
@@ -15,10 +7,12 @@ from onemoreepoch.messages.memes.models import CATEGORIES, MODES, Meme, MemeCata
 DEFAULT_CATALOG_PATH = Path(__file__).parent / "data" / "catalog.json"
 
 
+# Internal validation error, never escapes this module
 class _CatalogValidationError(Exception):
-    """Internal only — never escapes this module."""
+    pass
 
 
+# Validates a raw parsed-JSON dict and converts it into a MemeCatalog
 def _validate(raw: dict[str, Any]) -> MemeCatalog:
     try:
         memes = []
@@ -49,18 +43,17 @@ def _validate(raw: dict[str, Any]) -> MemeCatalog:
         raise _CatalogValidationError(str(exc)) from exc
 
 
+# Loads and validates a catalog file, raising on any problem
 def load_catalog(path: Path) -> MemeCatalog:
-    """Load and validate a catalog file. Raises on any problem."""
     raw = json.loads(path.read_text(encoding="utf-8"))
     return _validate(raw)
 
 
+# Tries an updated catalog then the packaged default, returning None instead of raising
 def load_active_catalog(updated_path: Path | None = None) -> MemeCatalog | None:
-    """Try an updated catalog, then the packaged default. Never raises."""
     for candidate in (updated_path, DEFAULT_CATALOG_PATH):
         if candidate is None:
             continue
-        # Falls through to the next candidate - a corrupt catalog must never raise.
         try:
             return load_catalog(candidate)
         except Exception:  # noqa: BLE001, S112

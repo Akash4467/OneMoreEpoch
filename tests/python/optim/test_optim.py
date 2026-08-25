@@ -1,5 +1,3 @@
-"""Tests for optimizers + an end-to-end training convergence check."""
-
 import numpy as np
 import pytest
 
@@ -10,15 +8,19 @@ from onemoreepoch.exceptions import OptimizerError
 from onemoreepoch.optim import SGD, AdaGrad, Adam, AdamW, Optimizer, RMSProp
 
 
+# Tests the shared Optimizer base class behavior
 class TestOptimizerBase:
+    # Checks an empty parameter list raises
     def test_rejects_empty_parameters(self):
         with pytest.raises(ValueError):
             SGD([], lr=0.1)
 
+    # Checks a non-positive learning rate raises
     def test_rejects_non_positive_lr(self):
         with pytest.raises(ValueError):
             SGD([Parameter([1.0])], lr=0.0)
 
+    # Checks base validation errors are OptimizerError instances
     def test_errors_are_optimizer_errors(self):
         from onemoreepoch.exceptions import OptimizerError
 
@@ -27,45 +29,53 @@ class TestOptimizerBase:
         with pytest.raises(OptimizerError):
             SGD([Parameter([1.0])], lr=-0.5)
 
+    # Checks the base Optimizer's _update_parameter is abstract
     def test_base_update_is_abstract(self):
         opt = Optimizer([Parameter([1.0])], lr=0.1)
         opt.parameters[0].grad = np.array([1.0])
         with pytest.raises(NotImplementedError):
             opt.step()
 
+    # Checks zero_grad() clears the parameter's gradient
     def test_zero_grad(self):
         param = Parameter([1.0])
         param.grad = np.array([5.0])
         SGD([param], lr=0.1).zero_grad()
         assert param.grad is None
 
+    # Checks step() skips parameters that have no gradient
     def test_step_skips_params_without_grad(self):
         param = Parameter([1.0])
-        SGD([param], lr=0.1).step()  # no grad — must not raise or move
+        SGD([param], lr=0.1).step()
         np.testing.assert_array_equal(param.data, [1.0])
 
 
+# Tests the SGD optimizer
 class TestSGD:
+    # Checks a plain (no-momentum) gradient descent update
     def test_vanilla_update(self):
         param = Parameter([10.0])
         param.grad = np.array([2.0])
         SGD([param], lr=0.5).step()
         np.testing.assert_allclose(param.data, [9.0])
 
+    # Checks momentum accumulates velocity across steps
     def test_momentum_accumulates(self):
         param = Parameter([0.0])
         opt = SGD([param], lr=1.0, momentum=0.5)
         param.grad = np.array([1.0])
-        opt.step()  # v=1, param=-1
+        opt.step()
         param.grad = np.array([1.0])
-        opt.step()  # v=1.5, param=-2.5
+        opt.step()
         np.testing.assert_allclose(param.data, [-2.5])
 
+    # Checks an invalid momentum value raises
     def test_invalid_momentum(self):
         with pytest.raises(ValueError):
             SGD([Parameter([1.0])], lr=0.1, momentum=1.0)
 
 
+# Tests each adaptive optimizer converges on a simple quadratic
 @pytest.mark.parametrize(
     "opt_cls,kwargs",
     [
@@ -76,37 +86,44 @@ class TestSGD:
     ],
 )
 class TestAdaptiveOptimizersConverge:
+    # Checks repeated steps drive the parameter toward the minimum of sum(w^2)
     def test_minimizes_quadratic(self, opt_cls, kwargs):
         param = Parameter(np.array([5.0, -3.0]))
         opt = opt_cls([param], **kwargs)
         for _ in range(500):
-            param.grad = 2 * param.data  # grad of sum(w^2)
+            param.grad = 2 * param.data
             opt.step()
             opt.zero_grad()
         np.testing.assert_allclose(param.data, [0.0, 0.0], atol=0.2)
 
 
+# Tests hyperparameter validation for the adaptive optimizers
 class TestAdaptiveOptimizerValidation:
+    # Checks Adam rejects an out-of-range beta
     def test_adam_rejects_bad_beta(self):
         with pytest.raises(OptimizerError):
             Adam([Parameter([1.0])], betas=(1.5, 0.999))
 
+    # Checks AdamW rejects a negative weight_decay
     def test_adamw_rejects_negative_weight_decay(self):
         with pytest.raises(OptimizerError):
             AdamW([Parameter([1.0])], weight_decay=-0.1)
 
+    # Checks RMSProp rejects an out-of-range alpha
     def test_rmsprop_rejects_bad_alpha(self):
         with pytest.raises(OptimizerError):
             RMSProp([Parameter([1.0])], alpha=1.5)
 
+    # Checks AdaGrad rejects a non-positive eps
     def test_adagrad_rejects_bad_eps(self):
         with pytest.raises(OptimizerError):
             AdaGrad([Parameter([1.0])], eps=0.0)
 
 
+# Tests full model-training pipelines end to end
 class TestEndToEnd:
+    # Checks a linear regression model converges to the true weight/bias
     def test_linear_regression_converges(self):
-        """Full pipeline: model → loss → backward → step → convergence."""
         get_backend().seed(0)
         true_w = np.array([[2.0], [-3.0]])
         true_b = 0.5
@@ -129,8 +146,8 @@ class TestEndToEnd:
         np.testing.assert_allclose(model.weight.data, true_w, atol=1e-3)
         np.testing.assert_allclose(model.bias.data, [true_b], atol=1e-3)
 
+    # Checks an MLP learns XOR, proving gradients flow through activations
     def test_mlp_learns_xor(self):
-        """Nonlinear problem — proves gradients flow through activations."""
         get_backend().seed(3)
         x = Tensor([[0.0, 0.0], [0.0, 1.0], [1.0, 0.0], [1.0, 1.0]])
         y = Tensor([[0.0], [1.0], [1.0], [0.0]])

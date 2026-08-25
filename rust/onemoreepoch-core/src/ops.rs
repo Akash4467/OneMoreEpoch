@@ -1,7 +1,6 @@
-//! Pure-Rust algorithms over RustArray — no PyO3, cargo-testable directly.
-
 use crate::array::{strides_for, unravel, RustArray};
 
+// Computes 2D@2D or 2D@1D matrix multiplication
 pub fn matmul(a: &RustArray, b: &RustArray) -> Result<RustArray, String> {
     match (a.shape.len(), b.shape.len()) {
         (2, 2) => {
@@ -47,6 +46,7 @@ pub fn matmul(a: &RustArray, b: &RustArray) -> Result<RustArray, String> {
     }
 }
 
+// Resolves an optional axis list (with negative-axis support) to concrete axes
 fn normalize_axes(axes: Option<&[i64]>, ndim: usize) -> Vec<usize> {
     match axes {
         None => (0..ndim).collect(),
@@ -57,6 +57,7 @@ fn normalize_axes(axes: Option<&[i64]>, ndim: usize) -> Vec<usize> {
     }
 }
 
+// Shared reduction loop parameterized by combine/finalize functions
 fn reduce_generic(
     a: &RustArray,
     axes: Option<&[i64]>,
@@ -102,18 +103,22 @@ fn reduce_generic(
     RustArray { data, shape: final_shape }
 }
 
+// Reduces an array by summation over the given axes
 pub fn reduce_sum(a: &RustArray, axes: Option<&[i64]>, keepdims: bool) -> RustArray {
     reduce_generic(a, axes, keepdims, 0.0, |acc, x| acc + x, |v, _| v)
 }
 
+// Reduces an array by averaging over the given axes
 pub fn reduce_mean(a: &RustArray, axes: Option<&[i64]>, keepdims: bool) -> RustArray {
     reduce_generic(a, axes, keepdims, 0.0, |acc, x| acc + x, |v, c| v / c.max(1) as f64)
 }
 
+// Reduces an array by taking the maximum over the given axes
 pub fn reduce_max(a: &RustArray, axes: Option<&[i64]>, keepdims: bool) -> RustArray {
     reduce_generic(a, axes, keepdims, f64::NEG_INFINITY, f64::max, |v, _| v)
 }
 
+// Permutes an array's axes, defaulting to a full reversal
 pub fn transpose(a: &RustArray, axes: Option<&[usize]>) -> RustArray {
     let ndim = a.shape.len();
     let perm: Vec<usize> = match axes {
@@ -131,14 +136,17 @@ pub fn transpose(a: &RustArray, axes: Option<&[usize]>) -> RustArray {
     RustArray { data, shape: new_shape }
 }
 
+// Unit tests for matmul, reductions, and transpose
 #[cfg(test)]
 mod tests {
     use super::*;
 
+    // Builds a RustArray from a flat buffer and shape
     fn arr(data: Vec<f64>, shape: Vec<usize>) -> RustArray {
         RustArray { data, shape }
     }
 
+    // Checks 2D by 2D matmul against a known result
     #[test]
     fn matmul_2d_2d() {
         let a = arr(vec![1.0, 2.0, 3.0, 4.0], vec![2, 2]);
@@ -148,6 +156,7 @@ mod tests {
         assert_eq!(out.data, vec![19.0, 22.0, 43.0, 50.0]);
     }
 
+    // Checks 2D by 1D matmul against a known result
     #[test]
     fn matmul_2d_1d() {
         let a = arr(vec![1.0, 2.0, 3.0, 4.0], vec![2, 2]);
@@ -157,6 +166,7 @@ mod tests {
         assert_eq!(out.data, vec![3.0, 7.0]);
     }
 
+    // Checks matmul rejects mismatched inner dimensions
     #[test]
     fn matmul_dimension_mismatch_errors() {
         let a = arr(vec![1.0, 2.0], vec![1, 2]);
@@ -164,6 +174,7 @@ mod tests {
         assert!(matmul(&a, &b).is_err());
     }
 
+    // Checks sum over all axes collapses to a scalar
     #[test]
     fn sum_all_axes() {
         let a = arr(vec![1.0, 2.0, 3.0, 4.0], vec![2, 2]);
@@ -172,6 +183,7 @@ mod tests {
         assert_eq!(out.data, vec![10.0]);
     }
 
+    // Checks sum over one axis with keepdims retains a size-1 axis
     #[test]
     fn sum_axis_keepdims() {
         let a = arr(vec![1.0, 2.0, 3.0, 4.0, 5.0, 6.0], vec![2, 3]);
@@ -180,6 +192,7 @@ mod tests {
         assert_eq!(out.data, vec![6.0, 15.0]);
     }
 
+    // Checks sum over one axis without keepdims drops that axis
     #[test]
     fn sum_axis_no_keepdims_drops_axis() {
         let a = arr(vec![1.0, 2.0, 3.0, 4.0, 5.0, 6.0], vec![2, 3]);
@@ -188,6 +201,7 @@ mod tests {
         assert_eq!(out.data, vec![5.0, 7.0, 9.0]);
     }
 
+    // Checks mean matches a manually computed average
     #[test]
     fn mean_matches_manual() {
         let a = arr(vec![2.0, 4.0, 6.0, 8.0], vec![4]);
@@ -195,6 +209,7 @@ mod tests {
         assert_eq!(out.data, vec![5.0]);
     }
 
+    // Checks max over one axis picks the correct values
     #[test]
     fn max_axis() {
         let a = arr(vec![1.0, 5.0, 3.0, 2.0, 0.0, 9.0], vec![2, 3]);
@@ -203,6 +218,7 @@ mod tests {
         assert_eq!(out.data, vec![5.0, 9.0]);
     }
 
+    // Checks default transpose matches ordinary matrix transpose for 2D
     #[test]
     fn transpose_2d_is_matrix_transpose() {
         let a = arr(vec![1.0, 2.0, 3.0, 4.0, 5.0, 6.0], vec![2, 3]);
@@ -211,16 +227,17 @@ mod tests {
         assert_eq!(out.data, vec![1.0, 4.0, 2.0, 5.0, 3.0, 6.0]);
     }
 
+    // Checks transpose with an explicit axis permutation
     #[test]
     fn transpose_with_explicit_axes() {
         let a = arr((0..24).map(|x| x as f64).collect(), vec![2, 3, 4]);
         let out = transpose(&a, Some(&[1, 0, 2]));
         assert_eq!(out.shape, vec![3, 2, 4]);
-        // spot check: out[1][0][2] should equal a[0][1][2] = 6.0
         let idx = 1 * (2 * 4) + 0 * 4 + 2;
         assert_eq!(out.data[idx], 6.0);
     }
 
+    // Checks transposing twice with default axes returns the original array
     #[test]
     fn transpose_roundtrip() {
         let a = arr((0..12).map(|x| x as f64).collect(), vec![3, 4]);
