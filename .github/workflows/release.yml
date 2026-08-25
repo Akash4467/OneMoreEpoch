@@ -8,7 +8,7 @@ on:
       target:
         description: "Where to publish"
         type: choice
-        options: [testpypi]
+        options: [testpypi, pypi]
         default: testpypi
 
 permissions:
@@ -96,7 +96,7 @@ jobs:
     needs: [linux, windows, macos, sdist]
     # Manual runs default to TestPyPI (safe to re-run); publishing a GitHub
     # Release always goes to real PyPI.
-    environment: ${{ github.event_name == 'release' && 'pypi' || 'testpypi' }}
+    environment: ${{ (github.event_name == 'release' || inputs.target == 'pypi') && 'pypi' || 'testpypi' }}
     permissions:
       id-token: write  # Trusted Publishing — no stored API token needed.
     steps:
@@ -114,7 +114,7 @@ jobs:
           packages-dir: dist
 
       - name: Publish to PyPI
-        if: github.event_name == 'release'
+        if: github.event_name == 'release' || (github.event_name == 'workflow_dispatch' && inputs.target == 'pypi')
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           packages-dir: dist
