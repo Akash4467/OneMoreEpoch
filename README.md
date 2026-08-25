@@ -1,7 +1,7 @@
 # OneMoreEpoch
 
-[![PyPI](https://img.shields.io/pypi/v/onemoreepoch)](https://pypi.org/project/onemoreepoch/)
-[![Python versions](https://img.shields.io/pypi/pyversions/onemoreepoch)](https://pypi.org/project/onemoreepoch/)
+[![Latest Release](https://img.shields.io/github/v/release/Akash4467/OneMoreEpoch?label=release)](https://github.com/Akash4467/OneMoreEpoch/releases)
+[![Python](https://img.shields.io/badge/python-3.12-blue)](https://www.python.org/)
 [![CI](https://github.com/Akash4467/OneMoreEpoch/actions/workflows/ci.yml/badge.svg)](https://github.com/Akash4467/OneMoreEpoch/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Akash4467/OneMoreEpoch/blob/main/LICENSE)
 
